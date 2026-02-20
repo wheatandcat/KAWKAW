@@ -133,7 +133,7 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
         <div className="flex items-center gap-4 flex-wrap">
           <span className="font-medium text-white">全品架空</span>
           <span>本日のお得情報</span>
-          <span>タイムセール</span>
+          <span className="cursor-pointer hover:text-white" onClick={() => navigate("/timesale")}>タイムセール</span>
           <span>新着アイテム</span>
           <span className="cursor-pointer hover:text-white" onClick={() => navigate("/ranking")}>ランキング</span>
           <span className="text-primary">買い物依存防止モード</span>
