@@ -7,6 +7,7 @@ import { Star, ShoppingCart, ChevronLeft, Truck, Shield, RotateCcw, Package } fr
 import { Link } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { ProductIcon } from "@/components/product-icon";
+import { ReviewSection } from "@/components/review-section";
 
 interface ProductDetailProps {
   onAddToCart: (id: string) => void;
@@ -141,6 +142,8 @@ export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
           </div>
         </div>
       </div>
+
+      <ReviewSection productId={product.id} />
     </div>
   );
 }

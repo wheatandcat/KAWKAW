@@ -61,9 +61,10 @@ Preferred communication style: Simple, everyday language.
 
 ### Key Design Decisions
 
-1. **Client-side data**: Products are hardcoded rather than fetched from an API. Cart and orders use localStorage. This makes the app work without any backend API but limits scalability.
-2. **Storage interface pattern**: The `IStorage` interface in `server/storage.ts` provides an abstraction layer, making it easy to swap in a database implementation later.
-3. **Shared schema**: The `shared/` directory contains code used by both frontend and backend (currently just the database schema and Zod types).
+1. **Client-side data**: Products are hardcoded rather than fetched from an API. Cart and orders use localStorage.
+2. **Server-side reviews**: Product reviews are stored in PostgreSQL so they can be shared across all users. API routes: `GET /api/reviews/:productId` and `POST /api/reviews`.
+3. **Storage interface pattern**: The `IStorage` interface in `server/storage.ts` provides an abstraction layer using Drizzle ORM with PostgreSQL (`server/db.ts`).
+4. **Shared schema**: The `shared/` directory contains code used by both frontend and backend (database schema for users and reviews, plus Zod validation types).
 
 ## External Dependencies
 
