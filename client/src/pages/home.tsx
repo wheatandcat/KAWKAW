@@ -1,9 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, TrendingUp, Zap, Gift, Search } from "lucide-react";
+import { Sparkles, TrendingUp, Zap, Gift, Search, RefreshCw } from "lucide-react";
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 interface HomeProps {
   searchQuery: string;
@@ -12,9 +21,12 @@ interface HomeProps {
 
 export default function Home({ searchQuery, onAddToCart }: HomeProps) {
   const [selectedCategory, setSelectedCategory] = useState("すべて");
+  const [shuffleKey, setShuffleKey] = useState(0);
+
+  const isFiltering = selectedCategory !== "すべて" || searchQuery.length > 0;
 
   const filteredProducts = useMemo(() => {
-    return products.filter((p) => {
+    let filtered = products.filter((p) => {
       const matchesCategory =
         selectedCategory === "すべて" || p.category === selectedCategory;
       const matchesSearch =
@@ -24,7 +36,18 @@ export default function Home({ searchQuery, onAddToCart }: HomeProps) {
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+
+    if (!isFiltering) {
+      filtered = shuffleArray(filtered).slice(0, 20);
+    }
+
+    return filtered;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, searchQuery, shuffleKey]);
+
+  const handleShuffle = useCallback(() => {
+    setShuffleKey((k) => k + 1);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -80,12 +103,26 @@ export default function Home({ searchQuery, onAddToCart }: HomeProps) {
 
       <div className="max-w-7xl mx-auto px-4 pb-8">
         <div className="flex items-center justify-between gap-2 mb-4">
-          <h2 className="text-base font-semibold text-foreground">
-            {selectedCategory === "すべて" ? "すべての商品" : selectedCategory}
-          </h2>
-          <Badge variant="secondary" className="no-default-hover-elevate no-default-active-elevate">
-            {filteredProducts.length}件
-          </Badge>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h2 className="text-base font-semibold text-foreground">
+              {isFiltering ? selectedCategory === "すべて" ? "検索結果" : selectedCategory : "おすすめ商品"}
+            </h2>
+            <Badge variant="secondary" className="no-default-hover-elevate no-default-active-elevate">
+              {isFiltering ? `${filteredProducts.length}件` : `${filteredProducts.length}件 / ${products.length}件中`}
+            </Badge>
+          </div>
+          {!isFiltering && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={handleShuffle}
+              data-testid="button-shuffle"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              シャッフル
+            </Button>
+          )}
         </div>
 
         {filteredProducts.length === 0 ? (
