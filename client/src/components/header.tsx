@@ -132,7 +132,7 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
       <div className="bg-[#232f3e] px-4 py-1.5 text-xs text-gray-300 hidden md:block">
         <div className="flex items-center gap-4 flex-wrap">
           <span className="font-medium text-white">全品架空</span>
-          <span>本日のお得情報</span>
+          <span className="cursor-pointer hover:text-white" onClick={() => navigate("/deals")}>本日のお得情報</span>
           <span className="cursor-pointer hover:text-white" onClick={() => navigate("/timesale")}>タイムセール</span>
           <span>新着アイテム</span>
           <span className="cursor-pointer hover:text-white" onClick={() => navigate("/ranking")}>ランキング</span>

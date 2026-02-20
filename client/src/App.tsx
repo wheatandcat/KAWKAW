@@ -14,6 +14,7 @@ import CheckoutComplete from "@/pages/checkout-complete";
 import OrdersPage from "@/pages/orders";
 import RankingPage from "@/pages/ranking";
 import TimeSalePage from "@/pages/timesale";
+import DealsPage from "@/pages/deals";
 import NotFound from "@/pages/not-found";
 import { useToast } from "@/hooks/use-toast";
 
@@ -74,6 +75,9 @@ function AppContent() {
         </Route>
         <Route path="/timesale">
           <TimeSalePage onAddToCart={handleAddToCart} />
+        </Route>
+        <Route path="/deals">
+          <DealsPage onAddToCart={handleAddToCart} />
         </Route>
         <Route component={NotFound} />
       </Switch>
