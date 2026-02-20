@@ -165,7 +165,7 @@ export const products: Product[] = [
     image: "droplets",
     rating: 4.5,
     reviewCount: 3201,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "4",
@@ -256,7 +256,7 @@ export const products: Product[] = [
     image: "alarm-clock",
     rating: 4.4,
     reviewCount: 3567,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "12",
@@ -450,7 +450,7 @@ export const products: Product[] = [
     image: "cloud",
     rating: 4.5,
     reviewCount: 5678,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "29",
@@ -621,7 +621,7 @@ export const products: Product[] = [
     image: "shield",
     rating: 4.3,
     reviewCount: 6789,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "44",
@@ -812,7 +812,7 @@ export const products: Product[] = [
     image: "pizza",
     rating: 4.7,
     reviewCount: 6789,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "61",
@@ -1126,7 +1126,7 @@ export const products: Product[] = [
     image: "sparkles",
     rating: 4.6,
     reviewCount: 4567,
-    badge: "Amazon's Choice",
+    badge: "カウカウ's Choice",
   },
   {
     id: "89",
