@@ -45,23 +45,25 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
           </h3>
         </Link>
 
-        <div className="flex items-center gap-1">
-          <div className="flex">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-3.5 h-3.5 ${
-                  i < Math.floor(product.rating)
-                    ? "text-amber-400 fill-amber-400"
-                    : "text-gray-300"
-                }`}
-              />
-            ))}
+        <Link href={`/product/${product.id}?scrollTo=reviews`} data-testid={`link-reviews-${product.id}`}>
+          <div className="flex items-center gap-1 cursor-pointer hover:underline">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-3.5 h-3.5 ${
+                    i < Math.floor(product.rating)
+                      ? "text-amber-400 fill-amber-400"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-primary">
+              ({product.reviewCount.toLocaleString()})
+            </span>
           </div>
-          <span className="text-xs text-muted-foreground">
-            ({product.reviewCount.toLocaleString()})
-          </span>
-        </div>
+        </Link>
 
         <div className="flex items-baseline gap-2 flex-wrap mt-auto">
           <span className="text-lg font-bold text-foreground" data-testid={`text-price-${product.id}`}>

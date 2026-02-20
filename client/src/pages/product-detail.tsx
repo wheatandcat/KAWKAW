@@ -1,4 +1,5 @@
-import { useParams } from "wouter";
+import { useParams, useSearch } from "wouter";
+import { useEffect, useRef } from "react";
 import { products } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +16,19 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
   const { id } = useParams<{ id: string }>();
+  const searchString = useSearch();
   const { toast } = useToast();
+  const reviewsRef = useRef<HTMLDivElement>(null);
   const product = products.find((p) => p.id === id);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchString);
+    if (params.get("scrollTo") === "reviews" && reviewsRef.current) {
+      setTimeout(() => {
+        reviewsRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, [searchString]);
 
   if (!product) {
     return (
@@ -143,7 +155,9 @@ export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
         </div>
       </div>
 
-      <ReviewSection productId={product.id} />
+      <div ref={reviewsRef}>
+        <ReviewSection productId={product.id} />
+      </div>
     </div>
   );
 }
