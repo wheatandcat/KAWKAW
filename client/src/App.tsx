@@ -15,6 +15,7 @@ import OrdersPage from "@/pages/orders";
 import RankingPage from "@/pages/ranking";
 import TimeSalePage from "@/pages/timesale";
 import DealsPage from "@/pages/deals";
+import NewArrivalsPage from "@/pages/new-arrivals";
 import NotFound from "@/pages/not-found";
 import { useToast } from "@/hooks/use-toast";
 
@@ -78,6 +79,9 @@ function AppContent() {
         </Route>
         <Route path="/deals">
           <DealsPage onAddToCart={handleAddToCart} />
+        </Route>
+        <Route path="/new-arrivals">
+          <NewArrivalsPage onAddToCart={handleAddToCart} />
         </Route>
         <Route component={NotFound} />
       </Switch>
