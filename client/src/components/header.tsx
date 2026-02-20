@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { ShoppingCart, Search, Package, Menu, X, Trophy } from "lucide-react";
+import { ShoppingCart, Search, Package, Menu, X, Trophy, Flame, Clock, PackagePlus, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -126,6 +126,46 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
             <Package className="w-4 h-4" />
             注文履歴
           </Button>
+
+          <div className="border-t border-gray-600 my-1" />
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-300 gap-2 w-full justify-start"
+            onClick={() => { navigate("/deals"); setMobileMenuOpen(false); }}
+            data-testid="link-deals-mobile"
+          >
+            <Flame className="w-4 h-4" />
+            本日のお得情報
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-300 gap-2 w-full justify-start"
+            onClick={() => { navigate("/timesale"); setMobileMenuOpen(false); }}
+            data-testid="link-timesale-mobile"
+          >
+            <Clock className="w-4 h-4" />
+            タイムセール
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-300 gap-2 w-full justify-start"
+            onClick={() => { navigate("/new-arrivals"); setMobileMenuOpen(false); }}
+            data-testid="link-newarrivals-mobile"
+          >
+            <PackagePlus className="w-4 h-4" />
+            新着アイテム
+          </Button>
+
+          <div className="border-t border-gray-600 my-1" />
+
+          <div className="flex items-center gap-2 px-3 py-1.5 text-sm text-primary">
+            <ShieldAlert className="w-4 h-4" />
+            買い物依存防止モード
+          </div>
         </div>
       )}
 
