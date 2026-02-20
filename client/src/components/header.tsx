@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { ShoppingCart, Search, Package, Menu, X } from "lucide-react";
+import { ShoppingCart, Search, Package, Menu, X, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +40,17 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
         </div>
 
         <div className="flex items-center gap-2 ml-auto flex-wrap">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-300 gap-1 hidden md:flex"
+            onClick={() => navigate("/ranking")}
+            data-testid="link-ranking"
+          >
+            <Trophy className="w-5 h-5" />
+            <span className="text-xs">ランキング</span>
+          </Button>
+
           <Button
             variant="ghost"
             size="sm"
@@ -99,6 +110,16 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
+            onClick={() => { navigate("/ranking"); setMobileMenuOpen(false); }}
+            data-testid="link-ranking-mobile"
+          >
+            <Trophy className="w-4 h-4" />
+            ランキング
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-300 gap-2 w-full justify-start"
             onClick={() => { navigate("/orders"); setMobileMenuOpen(false); }}
             data-testid="link-orders-mobile"
           >
@@ -114,7 +135,7 @@ export function Header({ cartCount, searchQuery, onSearchChange }: HeaderProps) 
           <span>本日のお得情報</span>
           <span>タイムセール</span>
           <span>新着アイテム</span>
-          <span>ランキング</span>
+          <span className="cursor-pointer hover:text-white" onClick={() => navigate("/ranking")}>ランキング</span>
           <span className="text-primary">買い物依存防止モード</span>
         </div>
       </div>
