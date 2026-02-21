@@ -19,7 +19,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <Card className="group flex flex-col bg-white dark:bg-card border border-card-border">
       <Link href={`/product/${product.id}`} data-testid={`link-product-${product.id}`}>
-        <div className="relative p-4 pb-2 cursor-pointer">
+        <div className="relative h-40 md:h-48 cursor-pointer" data-testid={`image-area-${product.id}`}>
           {product.badge && (
             <Badge
               variant="secondary"
@@ -29,7 +29,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
               {product.badge}
             </Badge>
           )}
-          <div className="flex items-center justify-center h-32 md:h-40">
+          <div className="flex items-center justify-center w-full h-full">
             <ProductIcon name={product.image} className="w-16 h-16 md:w-20 md:h-20" />
           </div>
         </div>
