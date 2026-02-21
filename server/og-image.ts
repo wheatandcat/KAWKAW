@@ -1,5 +1,6 @@
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
+import { lucideIconSvgData } from "./lucide-svg-data";
 
 let fontBoldData: ArrayBuffer | null = null;
 let fontRegularData: ArrayBuffer | null = null;
@@ -35,6 +36,42 @@ interface ProductInfo {
   reviewCount: number;
   badge?: string;
   description: string;
+  iconName?: string;
+}
+
+function buildIconSvgElement(iconName: string): any {
+  const elements = lucideIconSvgData[iconName] || lucideIconSvgData["package"] || [];
+  if (elements.length === 0) {
+    return { type: "div", props: { style: { fontSize: "80px" }, children: "📦" } };
+  }
+
+  const children = elements.map((el: any) => {
+    const props: Record<string, string> = { ...el.props };
+    if (!props.fill) props.fill = "none";
+    if (!props.stroke) props.stroke = "#f59e0b";
+    if (!props.strokeWidth) props.strokeWidth = "1.5";
+    if (!props.strokeLinecap) props.strokeLinecap = "round";
+    if (!props.strokeLinejoin) props.strokeLinejoin = "round";
+    if (props.fill === "currentColor") props.fill = "#f59e0b";
+    if (props.stroke === "currentColor") props.stroke = "#f59e0b";
+    return { type: el.tag, props };
+  });
+
+  return {
+    type: "svg",
+    props: {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "120",
+      height: "120",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "#f59e0b",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      children,
+    },
+  };
 }
 
 export async function generateOgImage(product: ProductInfo): Promise<Buffer> {
@@ -121,15 +158,7 @@ export async function generateOgImage(product: ProductInfo): Promise<Buffer> {
                     borderRadius: "16px",
                     flexShrink: 0,
                   },
-                  children: {
-                    type: "div",
-                    props: {
-                      style: {
-                        fontSize: "100px",
-                      },
-                      children: "📦",
-                    },
-                  },
+                  children: buildIconSvgElement(product.iconName || "package"),
                 },
               },
               {
