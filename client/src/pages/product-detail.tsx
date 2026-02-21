@@ -27,8 +27,10 @@ export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
       setTimeout(() => {
         reviewsRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 300);
+    } else {
+      window.scrollTo(0, 0);
     }
-  }, [searchString]);
+  }, [id, searchString]);
 
   if (!product) {
     return (
