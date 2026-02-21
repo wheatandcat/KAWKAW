@@ -4,7 +4,7 @@ import { products } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Star, ShoppingCart, ChevronLeft, Truck, Shield, RotateCcw, Package } from "lucide-react";
+import { Star, ShoppingCart, ChevronLeft, Truck, Shield, RotateCcw, Package, Share2 } from "lucide-react";
 import { Link } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { ProductIcon } from "@/components/product-icon";
@@ -146,6 +146,28 @@ export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
             >
               <ShoppingCart className="w-5 h-5" />
               カートに入れる
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full gap-2"
+              onClick={async () => {
+                const url = window.location.href;
+                const shareData = { title: product.name, text: product.description, url };
+                if (navigator.share) {
+                  try {
+                    await navigator.share(shareData);
+                  } catch {}
+                } else {
+                  await navigator.clipboard.writeText(url);
+                  toast({ title: "URLをコピーしました", description: "クリップボードにコピーされました" });
+                }
+              }}
+              data-testid="button-share"
+            >
+              <Share2 className="w-4 h-4" />
+              共有する
             </Button>
 
             <p className="text-[10px] text-muted-foreground text-center">
