@@ -32,6 +32,47 @@ export default function ProductDetail({ onAddToCart }: ProductDetailProps) {
     }
   }, [id, searchString]);
 
+  useEffect(() => {
+    if (!product) return;
+    const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+    const title = `${product.name} - カウカウ`;
+    const desc = `¥${product.price.toLocaleString()} (-${discount}%) | ${product.category}`;
+    const ogImage = `${window.location.origin}/api/og/${product.id}`;
+
+    document.title = title;
+
+    const setMeta = (property: string, content: string) => {
+      let el = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        if (property.startsWith("og:") || property.startsWith("twitter:")) {
+          el.setAttribute("property", property);
+        } else {
+          el.setAttribute("name", property);
+        }
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("og:title", title);
+    setMeta("og:description", desc);
+    setMeta("og:image", ogImage);
+    setMeta("og:image:width", "1200");
+    setMeta("og:image:height", "630");
+    setMeta("og:url", window.location.href);
+    setMeta("og:type", "product");
+    setMeta("og:site_name", "カウカウ");
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", title);
+    setMeta("twitter:description", desc);
+    setMeta("twitter:image", ogImage);
+
+    return () => {
+      document.title = "カウカウ - 架空ショッピング";
+    };
+  }, [product]);
+
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
