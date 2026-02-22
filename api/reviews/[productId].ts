@@ -1,5 +1,5 @@
 import express from "express";
-import { storage } from "../_lib/storage";
+import { storage } from "../_lib/storage.js";
 
 const app = express();
 

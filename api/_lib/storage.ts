@@ -1,5 +1,5 @@
-import { type Review, type InsertReview, reviews } from "../../shared/schema";
-import { db } from "./db";
+import { type Review, type InsertReview, reviews } from "../../shared/schema.js";
+import { db } from "./db.js";
 import { eq, desc } from "drizzle-orm";
 
 export const storage = {

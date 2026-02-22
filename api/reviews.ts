@@ -1,7 +1,7 @@
 import express from "express";
-import { storage } from "./_lib/storage";
-import { insertReviewSchema } from "../shared/schema";
-import { moderateText } from "./_lib/moderation";
+import { storage } from "./_lib/storage.js";
+import { insertReviewSchema } from "../shared/schema.js";
+import { moderateText } from "./_lib/moderation.js";
 
 const app = express();
 app.use(express.json());
