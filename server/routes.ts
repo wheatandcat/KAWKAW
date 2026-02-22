@@ -1,5 +1,5 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
+import type { Server } from "http";
 import { storage } from "./storage";
 import { insertReviewSchema } from "../shared/schema";
 import { generateOgImage } from "./og-image";
@@ -8,7 +8,7 @@ import { moderateText } from "./moderation";
 
 export async function registerRoutes(
   httpServer: Server,
-  app: Express
+  app: Express,
 ): Promise<Server> {
   app.get("/api/reviews/:productId", async (req, res) => {
     const reviews = await storage.getReviewsByProductId(req.params.productId);
@@ -18,12 +18,18 @@ export async function registerRoutes(
   app.post("/api/reviews", async (req, res) => {
     const parsed = insertReviewSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json({ message: parsed.error.issues.map(i => i.message).join(", ") });
+      return res.status(400).json({
+        message: parsed.error.issues.map((i) => i.message).join(", "),
+      });
     }
 
-    const { flagged } = await moderateText(`${parsed.data.title} ${parsed.data.comment}`);
+    const { flagged } = await moderateText(
+      `${parsed.data.title} ${parsed.data.comment}`,
+    );
     if (flagged) {
-      return res.status(400).json({ message: "不適切なコンテンツが含まれているため投稿できません" });
+      return res.status(400).json({
+        message: "不適切なコンテンツが含まれているため投稿できません",
+      });
     }
 
     const review = await storage.createReview(parsed.data);
