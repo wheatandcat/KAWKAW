@@ -6,7 +6,7 @@ import { moderateText } from "../server/moderation";
 const app = express();
 app.use(express.json());
 
-app.post("/api/reviews", async (req, res) => {
+app.post("*", async (req, res) => {
   const parsed = insertReviewSchema.safeParse(req.body);
   if (!parsed.success) {
     return res.status(400).json({ message: parsed.error.issues.map((i) => i.message).join(", ") });

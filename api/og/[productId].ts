@@ -4,9 +4,10 @@ import { generateOgImage } from "../../server/og-image";
 
 const app = express();
 
-app.get("/api/og/:productId", async (req, res) => {
+app.get("*", async (req, res) => {
   try {
-    const product = await getProductById(req.params.productId);
+    const productId = req.query.productId as string;
+    const product = await getProductById(productId);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }

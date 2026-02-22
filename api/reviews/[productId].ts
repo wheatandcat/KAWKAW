@@ -3,8 +3,9 @@ import { storage } from "../../server/storage";
 
 const app = express();
 
-app.get("/api/reviews/:productId", async (req, res) => {
-  const reviews = await storage.getReviewsByProductId(req.params.productId);
+app.get("*", async (req, res) => {
+  const productId = req.query.productId as string;
+  const reviews = await storage.getReviewsByProductId(productId);
   return res.json(reviews);
 });
 
