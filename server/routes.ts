@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertReviewSchema } from "@shared/schema";
+import { insertReviewSchema } from "../shared/schema";
 import { generateOgImage } from "./og-image";
 import { getProductById } from "./product-data";
 import { moderateText } from "./moderation";
