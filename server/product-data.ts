@@ -38,7 +38,7 @@ const pascalToKebab: Record<string, string> = {
 
 export async function getProducts(): Promise<ServerProduct[]> {
   if (productsCache) return productsCache;
-  const mod = await import("../client/src/lib/products");
+  const mod = await import("../lib/products");
   productsCache = mod.products.map((p: any) => ({
     id: p.id,
     name: p.name,

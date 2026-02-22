@@ -1,4 +1,4 @@
-import { products } from "./client/src/lib/products";
+import { products } from "./lib/products";
 
 const BOT_UA =
   /bot|crawler|spider|facebook|twitter|slack|discord|telegram|line|whatsapp|linkedin|preview|embed|fetch|curl/i;
