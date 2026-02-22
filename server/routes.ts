@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertReviewSchema } from "@shared/schema";
 import { generateOgImage } from "./og-image";
 import { getProductById } from "./product-data";
+import { moderateText } from "./moderation";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -19,6 +20,12 @@ export async function registerRoutes(
     if (!parsed.success) {
       return res.status(400).json({ message: parsed.error.issues.map(i => i.message).join(", ") });
     }
+
+    const { flagged } = await moderateText(`${parsed.data.title} ${parsed.data.comment}`);
+    if (flagged) {
+      return res.status(400).json({ message: "不適切なコンテンツが含まれているため投稿できません" });
+    }
+
     const review = await storage.createReview(parsed.data);
     res.status(201).json(review);
   });
