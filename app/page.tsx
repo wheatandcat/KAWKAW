@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,19 @@ function shuffleArray<T>(arr: T[]): T[] {
 export default function Home() {
   const { handleAddToCart, searchQuery } = useCartContext();
   const [selectedCategory, setSelectedCategory] = useState("すべて");
-  const [shuffleKey, setShuffleKey] = useState(0);
+  // SSR と hydration を一致させるため初期表示は安定した順序にする
+  const [displayProducts, setDisplayProducts] = useState(() => products.slice(0, 20));
+
+  // hydration 後にのみシャッフル
+  useEffect(() => {
+    setDisplayProducts(shuffleArray(products).slice(0, 20));
+  }, []);
 
   const isFiltering = selectedCategory !== "すべて" || searchQuery.length > 0;
 
   const filteredProducts = useMemo(() => {
-    let filtered = products.filter((p) => {
+    if (!isFiltering) return displayProducts;
+    return products.filter((p) => {
       const matchesCategory =
         selectedCategory === "すべて" || p.category === selectedCategory;
       const matchesSearch =
@@ -35,17 +42,10 @@ export default function Home() {
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-
-    if (!isFiltering) {
-      filtered = shuffleArray(filtered).slice(0, 20);
-    }
-
-    return filtered;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategory, searchQuery, shuffleKey]);
+  }, [selectedCategory, searchQuery, isFiltering, displayProducts]);
 
   const handleShuffle = useCallback(() => {
-    setShuffleKey((k) => k + 1);
+    setDisplayProducts(shuffleArray(products).slice(0, 20));
   }, []);
 
   return (
