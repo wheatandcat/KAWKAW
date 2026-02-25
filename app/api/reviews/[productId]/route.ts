@@ -7,5 +7,9 @@ export async function GET(
 ) {
   const { productId } = await params;
   const reviews = await storage.getReviewsByProductId(productId);
-  return NextResponse.json(reviews);
+  return NextResponse.json(reviews, {
+    headers: {
+      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=3600",
+    },
+  });
 }
