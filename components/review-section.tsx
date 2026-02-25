@@ -96,8 +96,8 @@ export function ReviewSection({ productId }: ReviewSectionProps) {
       }
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`/api/reviews/${productId}`] });
+    onSuccess: (newReview: Review) => {
+      queryClient.setQueryData<Review[]>([`/api/reviews/${productId}`], (prev = []) => [newReview, ...prev]);
       setShowForm(false);
       setNickname("");
       setRating(0);
