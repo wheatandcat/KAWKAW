@@ -3,6 +3,10 @@ import { Suspense } from "react";
 import { products } from "@/lib/products";
 import ProductDetailClient from "./product-detail-client";
 
+export async function generateStaticParams() {
+  return products.map((p) => ({ id: p.id }));
+}
+
 interface Props {
   params: Promise<{ id: string }>;
 }
