@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-カウカウ (KauKau) は買い物依存症防止を目的とした架空の日本語ECサイトシミュレーション。実際の決済は発生しない。
+カウカウ (KawKaw) は買い物依存症防止を目的とした架空の日本語ECサイトシミュレーション。実際の決済は発生しない。
 
 ## モノレポ構成 (npm workspaces)
 
@@ -125,10 +125,10 @@ import { storage, insertReviewSchema } from "@kawkaw/database";
 
 ## 環境変数
 
-| 変数 | 説明 |
-|------|------|
-| `DATABASE_URL` | PostgreSQL 接続文字列 (必須)。Neon の接続文字列を設定 |
-| `OPENAI_API_KEY` | レビュー投稿時のテキストモデレーション用 |
+| 変数             | 説明                                                  |
+| ---------------- | ----------------------------------------------------- |
+| `DATABASE_URL`   | PostgreSQL 接続文字列 (必須)。Neon の接続文字列を設定 |
+| `OPENAI_API_KEY` | レビュー投稿時のテキストモデレーション用              |
 
 ## 技術スタック
 

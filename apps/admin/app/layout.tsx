@@ -5,7 +5,7 @@ import { LogoutButton } from "@/components/logout-button";
 
 export const metadata: Metadata = {
   title: "カウカウ 管理画面",
-  description: "KauKau 管理画面",
+  description: "KawKaw 管理画面",
 };
 
 export default function RootLayout({
