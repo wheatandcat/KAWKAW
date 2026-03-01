@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 apps/public/        # ユーザー向け Next.js アプリ
-apps/admin/         # 管理画面 (未実装)
+apps/admin/         # 管理画面 (Vercel Authentication でチームメンバーのみ)
 packages/database/  # 共通 Drizzle ORM + スキーマ (@kawkaw/database)
 ```
 
@@ -18,14 +18,21 @@ packages/database/  # 共通 Drizzle ORM + スキーマ (@kawkaw/database)
 
 ```bash
 # ルートから実行
-npm run dev          # apps/public の開発サーバー起動
+npm run dev          # apps/public の開発サーバー起動 (port 3000)
+npm run dev:admin    # apps/admin の開発サーバー起動 (port 3001)
 npm run build:public # apps/public のプロダクションビルド
+npm run build:admin  # apps/admin のプロダクションビルド
 npm run db:push      # DBスキーマを PostgreSQL に反映
 
 # apps/public 内で実行
 npm run dev          # next dev
 npm run build        # next build
 npm run start        # next start
+npm run check        # TypeScript 型チェック
+
+# apps/admin 内で実行
+npm run dev          # next dev --port 3001
+npm run build        # next build
 npm run check        # TypeScript 型チェック
 
 # packages/database 内で実行
@@ -61,6 +68,19 @@ apps/public/
   package.json
   vercel.json
 
+apps/admin/
+  app/
+    api/reviews/route.ts        # GET /api/reviews (全件取得・search対応)
+    api/reviews/[id]/route.ts   # DELETE /api/reviews/:id
+    reviews/page.tsx            # レビュー管理画面 (一覧・検索・削除)
+  components/
+    providers.tsx               # TanStack Query のみ (CartProvider なし)
+    ui/                         # shadcn/ui (button, input, badge, alert-dialog)
+  lib/utils.ts
+  next.config.ts
+  package.json
+  vercel.json
+
 packages/database/              # 共通パッケージ (name: @kawkaw/database)
   src/
     schema.ts                   # Drizzle スキーマ定義
@@ -70,7 +90,7 @@ packages/database/              # 共通パッケージ (name: @kawkaw/database)
   drizzle.config.ts
 ```
 
-パスエイリアス: `@/*` → `apps/public/` 起点
+パスエイリアス: `@/*` → 各 app 起点 (`apps/public/` または `apps/admin/`)
 
 ### データフロー
 
@@ -95,7 +115,8 @@ import { storage, insertReviewSchema } from "@kawkaw/database";
 
 - **ホスティング**: Vercel (apps/public・apps/admin それぞれ別プロジェクト)
 - **DB**: Neon PostgreSQL (Singapore リージョン、無料枠 0.5GB)
-- **Vercel 設定**: Root Directory = `apps/public`
+- **Vercel 設定**: apps/public → Root Directory = `apps/public` / apps/admin → Root Directory = `apps/admin`
+- **admin 認証**: Vercel ダッシュボード → Project Settings → Deployment Protection → Vercel Authentication を有効化 (コード実装不要)
 - **ルーティング** (Next.js App Router):
   - `GET /api/reviews/:productId` → `app/api/reviews/[productId]/route.ts`
   - `POST /api/reviews` → `app/api/reviews/route.ts`

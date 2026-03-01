@@ -8,7 +8,9 @@
   ],
   "scripts": {
     "dev": "npm -w apps/public run dev",
+    "dev:admin": "npm -w apps/admin run dev",
     "build:public": "npm -w apps/public run build",
+    "build:admin": "npm -w apps/admin run build",
     "db:push": "npm -w packages/database run db:push"
   }
 }
