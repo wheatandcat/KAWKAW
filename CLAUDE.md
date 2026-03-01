@@ -6,15 +6,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 カウカウ (KauKau) は買い物依存症防止を目的とした架空の日本語ECサイトシミュレーション。実際の決済は発生しない。
 
+## モノレポ構成 (npm workspaces)
+
+```
+apps/public/        # ユーザー向け Next.js アプリ
+apps/admin/         # 管理画面 (Vercel Authentication でチームメンバーのみ)
+packages/database/  # 共通 Drizzle ORM + スキーマ (@kawkaw/database)
+```
+
 ## コマンド
 
 ```bash
-npm run dev       # 開発サーバー起動 (port 5000, Vite HMR付き)
-npm run build     # プロダクションビルド (Replit向け: Vite+esbuild)
-npm run start     # プロダクション起動
-npm run check     # TypeScript型チェック
-npm run db:push   # DBスキーマをPostgreSQLに反映
-npx vite build    # フロントエンドのみビルド (Vercel用)
+# ルートから実行
+npm run dev          # apps/public の開発サーバー起動 (port 3000)
+npm run dev:admin    # apps/admin の開発サーバー起動 (port 3001)
+npm run build:public # apps/public のプロダクションビルド
+npm run build:admin  # apps/admin のプロダクションビルド
+npm run db:push      # DBスキーマを PostgreSQL に反映
+
+# apps/public 内で実行
+npm run dev          # next dev
+npm run build        # next build
+npm run start        # next start
+npm run check        # TypeScript 型チェック
+
+# apps/admin 内で実行
+npm run dev          # next dev --port 3001
+npm run build        # next build
+npm run check        # TypeScript 型チェック
+
+# packages/database 内で実行
+npm run db:push      # drizzle-kit push
 ```
 
 lint・テストコマンドは未定義。
@@ -24,55 +46,95 @@ lint・テストコマンドは未定義。
 ### ディレクトリ構成
 
 ```
-client/src/    # フロントエンド (React + TypeScript + Vite)
-server/        # バックエンド (Express 5 + TypeScript)
-shared/        # フロントとバックエンドで共有するコード
+apps/public/
+  app/                          # Next.js App Router
+    api/reviews/route.ts        # POST /api/reviews
+    api/reviews/[productId]/    # GET /api/reviews/:productId
+    api/og/[productId]/         # GET /api/og/:productId (OG画像生成)
+    product/[id]/               # 商品詳細ページ
+    cart/, orders/, ranking/, timesale/, deals/, new-arrivals/
+  components/                   # React コンポーネント
+  hooks/                        # カスタムフック
+  lib/
+    cart-context.tsx            # CartProvider + useCartContext
+    store.ts                    # useCart + useOrders (localStorage)
+    products.ts                 # 商品データ 218件 (ハードコード)
+  server/                       # サーバーサイドユーティリティ (DB系を除く)
+    og-image.ts                 # OG画像生成 (satori + resvg)
+    moderation.ts               # テキストモデレーション (OpenAI)
+    lucide-svg-data.ts
+    product-data.ts
+  next.config.ts
+  package.json
+  vercel.json
+
+apps/admin/
+  app/
+    api/reviews/route.ts        # GET /api/reviews (全件取得・search対応)
+    api/reviews/[id]/route.ts   # DELETE /api/reviews/:id
+    reviews/page.tsx            # レビュー管理画面 (一覧・検索・削除)
+  components/
+    providers.tsx               # TanStack Query のみ (CartProvider なし)
+    ui/                         # shadcn/ui (button, input, badge, alert-dialog)
+  lib/utils.ts
+  next.config.ts
+  package.json
+  vercel.json
+
+packages/database/              # 共通パッケージ (name: @kawkaw/database)
+  src/
+    schema.ts                   # Drizzle スキーマ定義
+    db.ts                       # DB接続 (pg.Pool + drizzle)
+    storage.ts                  # IStorage インターフェース + DatabaseStorage
+    index.ts                    # 全エクスポート
+  drizzle.config.ts
 ```
 
-パスエイリアス: `@` → `client/src/`、`@shared` → `shared/`
+パスエイリアス: `@/*` → 各 app 起点 (`apps/public/` または `apps/admin/`)
 
 ### データフロー
 
-- **商品データ**: `client/src/lib/products.ts` にハードコード (118商品)。APIは使用しない。
-- **カート・注文**: localStorage で永続化。サーバー通信なし。`client/src/lib/store.ts` の `useCart` / `useOrders` フックで管理。
+- **商品データ**: `apps/public/lib/products.ts` にハードコード (218商品)。API不使用。
+- **カート・注文**: localStorage で永続化。サーバー通信なし。`useCart` / `useOrders` フックで管理。
 - **レビュー**: PostgreSQL (Drizzle ORM) に保存。`/api/reviews/:productId` で GET/POST。
-- **OG画像**: `/api/og/:productId` でsatori + resvgにより動的生成 (1200×630px、1時間インメモリキャッシュ)。
+- **OG画像**: `/api/og/:productId` で satori + resvg により動的生成 (1200×630px、1時間インメモリキャッシュ)。
 
-### OGミドルウェア
+### DB パッケージの使用方法
 
-SNSボットが `/product/:id` にアクセスすると `server/og-middleware.ts` が検知し、OGメタタグ付きHTMLを返す。
+```ts
+import { storage, insertReviewSchema } from "@kawkaw/database";
+```
 
-### ビルド
-
-- フロントエンド: Vite → `dist/public/`
-- サーバー: esbuild (CJS) → `dist/index.cjs`
-- ビルドスクリプト: `script/build.ts`
+`@kawkaw/database` は npm workspaces により `node_modules/@kawkaw/database` に symlink される。
 
 ### Storage パターン
 
-`server/storage.ts` の `IStorage` インターフェースで抽象化し、`DatabaseStorage` (Drizzle + PostgreSQL) を実装。
+`packages/database/src/storage.ts` の `IStorage` インターフェースで抽象化し、`DatabaseStorage` (Drizzle + PostgreSQL) を実装。`export const storage = new DatabaseStorage()` として singleton でエクスポート。
 
 ## デプロイ構成 (Vercel + Neon)
 
-- **ホスティング**: Vercel (Hobby プラン無料)
+- **ホスティング**: Vercel (apps/public・apps/admin それぞれ別プロジェクト)
 - **DB**: Neon PostgreSQL (Singapore リージョン、無料枠 0.5GB)
-- **ルーティング**:
-  - `/api/reviews/:productId` → `api/reviews/[productId].ts` (Serverless Function)
-  - `POST /api/reviews` → `api/reviews.ts` (Serverless Function)
-  - `/api/og/:productId` → `api/og/[productId].ts` (Serverless Function)
-  - `/product/:id` のボットアクセス → `middleware.ts` (Edge Middleware、OG HTML返却)
-  - その他 → `dist/public/index.html` (SPA fallback)
+- **Vercel 設定**: apps/public → Root Directory = `apps/public` / apps/admin → Root Directory = `apps/admin`
+- **admin 認証**: Vercel ダッシュボード → Project Settings → Deployment Protection → Vercel Authentication を有効化 (コード実装不要)
+- **ルーティング** (Next.js App Router):
+  - `GET /api/reviews/:productId` → `app/api/reviews/[productId]/route.ts`
+  - `POST /api/reviews` → `app/api/reviews/route.ts`
+  - `GET /api/og/:productId` → `app/api/og/[productId]/route.ts` (Node.js runtime)
+  - その他 → SPA フォールバック
 
 ## 環境変数
 
 | 変数 | 説明 |
 |------|------|
-| `DATABASE_URL` | PostgreSQL接続文字列 (必須)。Neon の接続文字列を設定 |
-| `PORT` | ローカル開発時のサーバーポート (デフォルト: 5000) |
+| `DATABASE_URL` | PostgreSQL 接続文字列 (必須)。Neon の接続文字列を設定 |
+| `OPENAI_API_KEY` | レビュー投稿時のテキストモデレーション用 |
 
 ## 技術スタック
 
-- **フロントエンド**: React 18, TypeScript, Tailwind CSS, shadcn/ui (new-yorkスタイル), wouter (ルーティング)
-- **バックエンド**: Node.js, Express 5, tsx
-- **DB**: PostgreSQL + Drizzle ORM
-- **OG画像**: satori + @resvg/resvg-js
+- **フレームワーク**: Next.js 15 (App Router)
+- **スタイル**: React 18, TypeScript, Tailwind CSS v3, shadcn/ui (new-york)
+- **状態管理**: TanStack Query + CartContext (localStorage)
+- **DB**: PostgreSQL + Drizzle ORM (Neon)
+- **OG画像**: satori + @resvg/resvg-js (`export const runtime = "nodejs"` 必須)
+- **モノレポ**: npm workspaces

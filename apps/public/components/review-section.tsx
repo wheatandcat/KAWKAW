@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Star, MessageSquare, Loader2, Send } from "lucide-react";
-import type { Review } from "@/shared/schema";
+import type { Review } from "@kawkaw/database";
 
 interface ReviewSectionProps {
   productId: string;

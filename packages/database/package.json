@@ -1,0 +1,28 @@
+{
+  "name": "@kawkaw/database",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.39.3",
+    "drizzle-zod": "^0.7.0",
+    "pg": "^8.16.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.6",
+    "drizzle-kit": "^0.31.8",
+    "typescript": "5.6.3"
+  },
+  "overrides": {
+    "drizzle-kit": {
+      "@esbuild-kit/esm-loader": "npm:tsx@^4.20.4"
+    }
+  }
+}

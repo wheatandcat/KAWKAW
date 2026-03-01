@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { storage } from "@/server/storage";
-import { insertReviewSchema } from "@/shared/schema";
+import { storage, insertReviewSchema } from "@kawkaw/database";
 import { moderateText } from "@/server/moderation";
 
 export async function POST(req: Request) {
