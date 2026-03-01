@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { storage } from "@kawkaw/database";
 
-const LIMIT = 100;
+const LIMIT = 30;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

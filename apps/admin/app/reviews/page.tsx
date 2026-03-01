@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import type { Review } from "@kawkaw/database";
 
-const LIMIT = 100;
+const LIMIT = 30;
 
 type ReviewsResponse = {
   reviews: Review[];
