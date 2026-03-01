@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { storage } from "@/server/storage";
+import { storage } from "@kawkaw/database";
 
 export async function GET(
   _req: Request,
