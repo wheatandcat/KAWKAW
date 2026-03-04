@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/header";
-import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "カウカウ - 架空のショッピングサイト",
@@ -16,6 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <head>
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "4be307b2886f4aa3878835cdcc8a51bb"}'
+        />
+      </head>
       <body>
         <Providers>
           <div className="min-h-screen bg-background">
@@ -23,8 +29,7 @@ export default function RootLayout({
             {children}
           </div>
         </Providers>
-        <Analytics />
-      </body>
+</body>
     </html>
   );
 }
