@@ -9,3 +9,4 @@ vite.config.ts.*
 .next/
 .mcp.json
 doc
+cloudflare/.wrangler
