@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-カウカウ (KawKaw) は買い物依存症防止を目的とした架空の日本語ECサイトシミュレーション。実際の決済は発生しない。
+カウカウ (KawKaw) は買い物衝動を抑制するための架空の日本語ECサイトシミュレーション。実際の決済は発生しない。
 
 ## モノレポ構成 (npm workspaces)
 
