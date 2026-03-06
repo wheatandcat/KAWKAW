@@ -20,19 +20,21 @@ function shuffleArray<T>(arr: T[]): T[] {
 export default function HomeClient() {
   const { handleAddToCart, searchQuery } = useCartContext();
   const [selectedCategory, setSelectedCategory] = useState("すべて");
+  const activeProducts = useMemo(() => products.filter((p) => !p.disabled), []);
+
   // SSR と hydration を一致させるため初期表示は安定した順序にする
-  const [displayProducts, setDisplayProducts] = useState(() => products.slice(0, 20));
+  const [displayProducts, setDisplayProducts] = useState(() => activeProducts.slice(0, 20));
 
   // hydration 後にのみシャッフル
   useEffect(() => {
-    setDisplayProducts(shuffleArray(products).slice(0, 20));
-  }, []);
+    setDisplayProducts(shuffleArray(activeProducts).slice(0, 20));
+  }, [activeProducts]);
 
   const isFiltering = selectedCategory !== "すべて" || searchQuery.length > 0;
 
   const filteredProducts = useMemo(() => {
     if (!isFiltering) return displayProducts;
-    return products.filter((p) => {
+    return activeProducts.filter((p) => {
       const matchesCategory =
         selectedCategory === "すべて" || p.category === selectedCategory;
       const matchesSearch =
@@ -42,11 +44,11 @@ export default function HomeClient() {
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery, isFiltering, displayProducts]);
+  }, [selectedCategory, searchQuery, isFiltering, displayProducts, activeProducts]);
 
   const handleShuffle = useCallback(() => {
-    setDisplayProducts(shuffleArray(products).slice(0, 20));
-  }, []);
+    setDisplayProducts(shuffleArray(activeProducts).slice(0, 20));
+  }, [activeProducts]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,7 +109,7 @@ export default function HomeClient() {
               {isFiltering ? selectedCategory === "すべて" ? "検索結果" : selectedCategory : "おすすめ商品"}
             </h2>
             <Badge variant="secondary" className="no-default-hover-elevate no-default-active-elevate">
-              {isFiltering ? `${filteredProducts.length}件` : `${filteredProducts.length}件 / ${products.length}件中`}
+              {isFiltering ? `${filteredProducts.length}件` : `${filteredProducts.length}件 / ${activeProducts.length}件中`}
             </Badge>
           </div>
           {!isFiltering && (

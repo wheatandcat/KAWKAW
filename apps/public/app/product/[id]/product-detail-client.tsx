@@ -7,7 +7,16 @@ import { products } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Star, ShoppingCart, ChevronLeft, Truck, Shield, RotateCcw, Package, Share2 } from "lucide-react";
+import {
+  Star,
+  ShoppingCart,
+  ChevronLeft,
+  Truck,
+  Shield,
+  RotateCcw,
+  Package,
+  Share2,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ProductIcon } from "@/components/product-icon";
 import { ReviewSection } from "@/components/review-section";
@@ -49,8 +58,25 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
     );
   }
 
+  if (product.disabled) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+        <Package className="w-16 h-16 text-muted-foreground/40 mb-4" />
+        <p className="text-lg font-medium">申し訳ございません。</p>
+        <p className="text-base text-muted-foreground mt-2">
+          入力された架空商品は、時空倫理委員会の指導に基づき永久封印いたしました。
+        </p>
+        <Link href="/">
+          <Button variant="outline" size="sm" className="mt-6">
+            トップに戻る
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
   const discount = Math.round(
-    ((product.originalPrice - product.price) / product.originalPrice) * 100
+    ((product.originalPrice - product.price) / product.originalPrice) * 100,
   );
 
   const handleAdd = () => {
@@ -65,7 +91,12 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-4 py-4">
         <Link href="/">
-          <Button variant="ghost" size="sm" className="gap-1 mb-4 text-muted-foreground" data-testid="button-back">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="gap-1 mb-4 text-muted-foreground"
+            data-testid="button-back"
+          >
             <ChevronLeft className="w-4 h-4" />
             商品一覧に戻る
           </Button>
@@ -73,15 +104,23 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-10">
           <div className="flex items-center justify-center bg-card border border-card-border rounded-md p-8">
-            <ProductIcon name={product.image} className="w-32 h-32 md:w-40 md:h-40" />
+            <ProductIcon
+              name={product.image}
+              className="w-32 h-32 md:w-40 md:h-40"
+            />
           </div>
 
           <div className="flex flex-col gap-4">
             {product.badge && (
-              <Badge variant="secondary" className="self-start">{product.badge}</Badge>
+              <Badge variant="secondary" className="self-start">
+                {product.badge}
+              </Badge>
             )}
 
-            <h1 className="text-xl md:text-2xl font-bold text-foreground" data-testid="text-product-title">
+            <h1
+              className="text-xl md:text-2xl font-bold text-foreground"
+              data-testid="text-product-title"
+            >
               {product.name}
             </h1>
 
@@ -108,21 +147,33 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
 
             <div className="border-t border-b py-3">
               <div className="flex items-baseline gap-3 flex-wrap">
-                <Badge variant="destructive" className="no-default-hover-elevate no-default-active-elevate">
+                <Badge
+                  variant="destructive"
+                  className="no-default-hover-elevate no-default-active-elevate"
+                >
                   -{discount}% OFF
                 </Badge>
-                <span className="text-2xl md:text-3xl font-bold text-foreground" data-testid="text-detail-price">
+                <span
+                  className="text-2xl md:text-3xl font-bold text-foreground"
+                  data-testid="text-detail-price"
+                >
                   ¥{product.price.toLocaleString()}
                 </span>
               </div>
               <div className="mt-1">
                 <span className="text-sm text-muted-foreground">
-                  参考価格: <span className="line-through">¥{product.originalPrice.toLocaleString()}</span>
+                  参考価格:{" "}
+                  <span className="line-through">
+                    ¥{product.originalPrice.toLocaleString()}
+                  </span>
                 </span>
               </div>
             </div>
 
-            <p className="text-sm text-muted-foreground leading-relaxed" data-testid="text-product-description">
+            <p
+              className="text-sm text-muted-foreground leading-relaxed"
+              data-testid="text-product-description"
+            >
               {product.description}
             </p>
 
@@ -159,14 +210,21 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
               className="w-full gap-2"
               onClick={async () => {
                 const url = window.location.href;
-                const shareData = { title: product.name, text: product.description, url };
+                const shareData = {
+                  title: product.name,
+                  text: product.description,
+                  url,
+                };
                 if (navigator.share) {
                   try {
                     await navigator.share(shareData);
                   } catch {}
                 } else {
                   await navigator.clipboard.writeText(url);
-                  toast({ title: "URLをコピーしました", description: "クリップボードにコピーされました" });
+                  toast({
+                    title: "URLをコピーしました",
+                    description: "クリップボードにコピーされました",
+                  });
                 }
               }}
               data-testid="button-share"
