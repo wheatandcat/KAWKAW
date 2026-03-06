@@ -83,7 +83,7 @@ export default function OrdersPage() {
                 <div className="p-4">
                   <div className="space-y-2.5">
                     {order.items.map((item, index) => (
-                      <div key={index} className="flex items-center gap-3">
+                      <Link key={index} href={`/product/${item.productId}`} className="flex items-center gap-3 hover:bg-muted/50 rounded-md px-1 -mx-1 transition-colors">
                         <div className="shrink-0">
                           <ProductIcon name={item.image} className="w-6 h-6" />
                         </div>
@@ -98,7 +98,7 @@ export default function OrdersPage() {
                         <span className="text-sm font-medium text-foreground shrink-0">
                           ¥{(item.price * item.quantity).toLocaleString()}
                         </span>
-                      </div>
+                      </Link>
                     ))}
                   </div>
 
