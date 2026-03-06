@@ -8,13 +8,16 @@ import { ProductIcon } from "@/components/product-icon";
 import { useCartContext } from "@/lib/cart-context";
 
 export default function CartPage() {
-  const { cart, cartTotal, updateQuantity, removeFromCart, handleCheckout } = useCartContext();
+  const { cart, cartTotal, updateQuantity, removeFromCart, handleCheckout } =
+    useCartContext();
 
   if (cart.length === 0) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center px-4">
         <ShoppingBag className="w-16 h-16 text-muted-foreground/40 mb-4" />
-        <h2 className="text-xl font-semibold text-foreground">カートは空です</h2>
+        <h2 className="text-xl font-semibold text-foreground">
+          カートは空です
+        </h2>
         <p className="text-sm text-muted-foreground mt-1">
           架空の商品をカートに入れてみましょう
         </p>
@@ -31,13 +34,21 @@ export default function CartPage() {
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-4">
         <Link href="/">
-          <Button variant="ghost" size="sm" className="gap-1 mb-4 text-muted-foreground" data-testid="button-back-to-shop">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="gap-1 mb-4 text-muted-foreground"
+            data-testid="button-back-to-shop"
+          >
             <ChevronLeft className="w-4 h-4" />
             買い物を続ける
           </Button>
         </Link>
 
-        <h1 className="text-xl font-bold text-foreground mb-4" data-testid="text-cart-title">
+        <h1
+          className="text-xl font-bold text-foreground mb-4"
+          data-testid="text-cart-title"
+        >
           ショッピングカート
         </h1>
 
@@ -52,7 +63,10 @@ export default function CartPage() {
                 <div className="flex gap-4">
                   <Link href={`/product/${item.product.id}`}>
                     <div className="shrink-0 cursor-pointer flex items-center justify-center w-16 md:w-20 bg-background rounded-md p-2">
-                      <ProductIcon name={item.product.image} className="w-10 h-10 md:w-14 md:h-14" />
+                      <ProductIcon
+                        name={item.product.image}
+                        className="w-10 h-10 md:w-14 md:h-14"
+                      />
                     </div>
                   </Link>
                   <div className="flex-1 min-w-0">
@@ -73,7 +87,9 @@ export default function CartPage() {
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() =>
+                            updateQuantity(item.product.id, item.quantity - 1)
+                          }
                           data-testid={`button-decrease-${item.product.id}`}
                         >
                           <Minus className="w-3 h-3" />
@@ -87,7 +103,9 @@ export default function CartPage() {
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() =>
+                            updateQuantity(item.product.id, item.quantity + 1)
+                          }
                           data-testid={`button-increase-${item.product.id}`}
                         >
                           <Plus className="w-3 h-3" />
@@ -133,8 +151,13 @@ export default function CartPage() {
               </div>
               <div className="border-t mt-3 pt-3">
                 <div className="flex justify-between gap-2 items-baseline">
-                  <span className="font-semibold text-foreground">合計（税込）</span>
-                  <span className="text-xl font-bold text-primary" data-testid="text-cart-total">
+                  <span className="font-semibold text-foreground">
+                    合計（税込）
+                  </span>
+                  <span
+                    className="text-xl font-bold text-primary"
+                    data-testid="text-cart-total"
+                  >
                     ¥{cartTotal.toLocaleString()}
                   </span>
                 </div>

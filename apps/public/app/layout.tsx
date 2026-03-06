@@ -5,7 +5,8 @@ import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "カウカウ - 架空のショッピングサイト",
-  description: "買い物依存症防止のための架空ECサイト。実際の決済は発生しません。",
+  description:
+    "買い物衝動を抑制するための架空ECサイト。実際の決済は発生しません。",
 };
 
 export default function RootLayout({
@@ -29,7 +30,7 @@ export default function RootLayout({
             {children}
           </div>
         </Providers>
-</body>
+      </body>
     </html>
   );
 }

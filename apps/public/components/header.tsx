@@ -2,7 +2,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ShoppingCart, Search, Package, Menu, X, Trophy, Flame, Clock, PackagePlus, ShieldAlert } from "lucide-react";
+import {
+  ShoppingCart,
+  Search,
+  Package,
+  Menu,
+  X,
+  Trophy,
+  Flame,
+  Clock,
+  PackagePlus,
+  ShieldAlert,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -18,8 +29,12 @@ export function Header() {
       <div className="flex items-center gap-3 px-4 py-2">
         <Link href="/" data-testid="link-home">
           <div className="flex items-center gap-1 shrink-0 cursor-pointer">
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-primary">カウカウ</span>
-            <span className="text-[10px] text-gray-400 hidden md:block">.fake</span>
+            <span className="text-xl md:text-2xl font-bold tracking-tight text-primary">
+              カウカウ
+            </span>
+            <span className="text-[10px] text-gray-400 hidden md:block">
+              .fake
+            </span>
           </div>
         </Link>
 
@@ -86,7 +101,11 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             data-testid="button-mobile-menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </Button>
         </div>
       </div>
@@ -108,7 +127,10 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
-            onClick={() => { router.push("/ranking"); setMobileMenuOpen(false); }}
+            onClick={() => {
+              router.push("/ranking");
+              setMobileMenuOpen(false);
+            }}
             data-testid="link-ranking-mobile"
           >
             <Trophy className="w-4 h-4" />
@@ -118,7 +140,10 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
-            onClick={() => { router.push("/orders"); setMobileMenuOpen(false); }}
+            onClick={() => {
+              router.push("/orders");
+              setMobileMenuOpen(false);
+            }}
             data-testid="link-orders-mobile"
           >
             <Package className="w-4 h-4" />
@@ -131,7 +156,10 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
-            onClick={() => { router.push("/deals"); setMobileMenuOpen(false); }}
+            onClick={() => {
+              router.push("/deals");
+              setMobileMenuOpen(false);
+            }}
             data-testid="link-deals-mobile"
           >
             <Flame className="w-4 h-4" />
@@ -141,7 +169,10 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
-            onClick={() => { router.push("/timesale"); setMobileMenuOpen(false); }}
+            onClick={() => {
+              router.push("/timesale");
+              setMobileMenuOpen(false);
+            }}
             data-testid="link-timesale-mobile"
           >
             <Clock className="w-4 h-4" />
@@ -151,7 +182,10 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="text-gray-300 gap-2 w-full justify-start"
-            onClick={() => { router.push("/new-arrivals"); setMobileMenuOpen(false); }}
+            onClick={() => {
+              router.push("/new-arrivals");
+              setMobileMenuOpen(false);
+            }}
             data-testid="link-newarrivals-mobile"
           >
             <PackagePlus className="w-4 h-4" />
@@ -162,7 +196,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 px-3 py-1.5 text-sm text-primary">
             <ShieldAlert className="w-4 h-4" />
-            買い物依存防止モード
+            買い物衝動抑制モード
           </div>
         </div>
       )}
@@ -170,11 +204,31 @@ export function Header() {
       <div className="bg-[#232f3e] px-4 py-1.5 text-xs text-gray-300 hidden md:block">
         <div className="flex items-center gap-4 flex-wrap">
           <span className="font-medium text-white">全品架空</span>
-          <span className="cursor-pointer hover:text-white" onClick={() => router.push("/deals")}>本日のお得情報</span>
-          <span className="cursor-pointer hover:text-white" onClick={() => router.push("/timesale")}>タイムセール</span>
-          <span className="cursor-pointer hover:text-white" onClick={() => router.push("/new-arrivals")}>新着アイテム</span>
-          <span className="cursor-pointer hover:text-white" onClick={() => router.push("/ranking")}>ランキング</span>
-          <span className="text-primary">買い物依存防止モード</span>
+          <span
+            className="cursor-pointer hover:text-white"
+            onClick={() => router.push("/deals")}
+          >
+            本日のお得情報
+          </span>
+          <span
+            className="cursor-pointer hover:text-white"
+            onClick={() => router.push("/timesale")}
+          >
+            タイムセール
+          </span>
+          <span
+            className="cursor-pointer hover:text-white"
+            onClick={() => router.push("/new-arrivals")}
+          >
+            新着アイテム
+          </span>
+          <span
+            className="cursor-pointer hover:text-white"
+            onClick={() => router.push("/ranking")}
+          >
+            ランキング
+          </span>
+          <span className="text-primary">買い物衝動抑制モード</span>
         </div>
       </div>
     </header>
