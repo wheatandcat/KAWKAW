@@ -86,6 +86,7 @@ import {
   Trophy,
   Car,
   Tent,
+  Keyboard,
 } from "lucide-react";
 
 const iconMap: Record<string, typeof Headphones> = {
@@ -165,6 +166,8 @@ const iconMap: Record<string, typeof Headphones> = {
   target: Target,
   bike: Bike,
   "wand-2": Wand2,
+  wand2: Wand2,
+  keyboard: Keyboard,
   cog: Cog,
   "flower-2": Flower2,
   microscope: Microscope,

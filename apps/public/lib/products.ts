@@ -229,6 +229,10 @@ export const productIcons: Record<string, string> = {
   "216": "Sparkles",
   "217": "Star",
   "218": "Gift",
+  "219": "Sparkles",
+  "220": "Zap",
+  "221": "Keyboard",
+  "222": "Wand2",
 };
 
 export const products: Product[] = [
@@ -1222,7 +1226,7 @@ export const products: Product[] = [
   },
   {
     id: "81",
-    name: "空飛ぶルンバ型掃除機",
+    name: "空飛ぶロボット掃除機",
     price: 42000,
     originalPrice: 58000,
     description:
@@ -2906,5 +2910,55 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 11234,
     badge: "お買い得",
+  },
+  {
+    id: "219",
+    name: "四次元ぷっくりホログラムシール",
+    price: 3800,
+    originalPrice: 5500,
+    description:
+      "わずか10mmの薄さに数キロメートル先の景色を閉じ込めた、無限の奥行きを持つシール。現実の時刻と同期しており、シールの中の太陽が本当に沈み夜になると星が瞬く。指で触れるとホログラムが波打つインタラクティブ体験付き。ノートや手帳に貼ると宇宙への窓が出現するが、見つめすぎて会議の内容が頭に入らなくなっても当社は一切責任を負いません。",
+    category: "エンタメ・趣味",
+    image: "sparkles",
+    rating: 4.4,
+    reviewCount: 5678,
+  },
+  {
+    id: "220",
+    name: "雷を充電できるモバイルバッテリー",
+    price: 29800,
+    originalPrice: 45000,
+    description:
+      "落雷を直接キャッチして充電するモバイルバッテリー。1回の雷でスマホ約10万回分の充電が可能。ただし雷が落ちる場所に自分で行く必要がある。付属の避雷針アンテナ（全長3m）で雷を誘導。成功率は0.3%だが、成功すれば一生充電に困らない。防水だが、持ち主は防水ではない。",
+    category: "テクノロジー",
+    image: "zap",
+    rating: 3.2,
+    reviewCount: 412,
+  },
+  {
+    id: "221",
+    name: "AI自動バグ修正キーボード Pro",
+    price: 58000,
+    originalPrice: 79800,
+    description:
+      "入力されたコードをリアルタイム解析し、AIが自動でバグを修正する次世代キーボード。Python・Go・TypeScriptなど主要18言語に対応し、タイプするだけでコンパイルエラーの93%を修正可能。当社テストでは平均デバッグ時間を72%削減。ただしAIは自信満々にコードを書き換えるため、気付くとアーキテクチャ全体が別物になっている場合があります。",
+    category: "テクノロジー",
+    image: "keyboard",
+    rating: 4.1,
+    reviewCount: 1893,
+    badge: "新着",
+  },
+  {
+    id: "222",
+    name: "振ると願いが叶う（気がする）ステッキ",
+    price: 2980,
+    originalPrice: 4200,
+    description:
+      "振ると先端がキラキラ光って願いが叶った気分になるステッキ。実際には何も起きないが、振った瞬間のワクワク感がプライスレス。累計販売300万本のロングセラー商品。レビューの98%が「気持ちだけは叶った」。大人が公園で振ると通報される可能性があるので自宅での使用を推奨。光のパターンは12種類。電池式（単4×2本）。",
+    category: "エンタメ・趣味",
+    image: "wand2",
+    rating: 4.6,
+    reviewCount: 30000,
+    badge: "ベストセラー",
   },
 ];
