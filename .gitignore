@@ -10,3 +10,4 @@ vite.config.ts.*
 .mcp.json
 doc
 cloudflare/.wrangler
+tsconfig.tsbuildinfo
