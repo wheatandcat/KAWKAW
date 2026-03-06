@@ -196,7 +196,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 px-3 py-1.5 text-sm text-primary">
             <ShieldAlert className="w-4 h-4" />
-            買い物依存防止モード
+            買い物衝動抑制モード
           </div>
         </div>
       )}
