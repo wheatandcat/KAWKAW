@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer, timestamp, serial } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, timestamp, serial, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -39,3 +39,32 @@ export const insertReviewSchema = createInsertSchema(reviews).omit({
 
 export type InsertReview = z.infer<typeof insertReviewSchema>;
 export type Review = typeof reviews.$inferSelect;
+
+export const ngWords = pgTable("ng_words", {
+  id: serial("id").primaryKey(),
+  word: text("word").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertNgWordSchema = createInsertSchema(ngWords).pick({ word: true });
+export type InsertNgWord = z.infer<typeof insertNgWordSchema>;
+export type NgWord = typeof ngWords.$inferSelect;
+
+export const scanProgress = pgTable("scan_progress", {
+  id: integer("id").primaryKey().default(1),
+  lastScannedId: integer("last_scanned_id").notNull().default(0),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type ScanProgress = typeof scanProgress.$inferSelect;
+
+export const scanCandidates = pgTable("scan_candidates", {
+  id: serial("id").primaryKey(),
+  reviewId: integer("review_id").notNull().references(() => reviews.id, { onDelete: "cascade" }),
+  spamScore: integer("spam_score").notNull(),
+  reasons: text("reasons").array().notNull(),
+  aiChecked: boolean("ai_checked").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type ScanCandidate = typeof scanCandidates.$inferSelect;

@@ -1,7 +1,11 @@
-import { type User, type InsertUser, type Review, type InsertReview, users, reviews } from "./schema";
+import {
+  type User, type InsertUser, type Review, type InsertReview,
+  type NgWord, type InsertNgWord, type ScanProgress, type ScanCandidate,
+  users, reviews, ngWords, scanProgress, scanCandidates,
+} from "./schema";
 import { randomUUID } from "crypto";
 import { db } from "./db";
-import { eq, desc, or, ilike, count } from "drizzle-orm";
+import { eq, desc, or, ilike, count, gt, max, sql } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -11,6 +15,18 @@ export interface IStorage {
   createReview(review: InsertReview): Promise<Review>;
   getAllReviews(search?: string, page?: number, limit?: number): Promise<{ reviews: Review[]; total: number }>;
   deleteReview(id: number): Promise<void>;
+  // NGワード
+  getNgWords(): Promise<NgWord[]>;
+  addNgWord(word: InsertNgWord): Promise<NgWord>;
+  deleteNgWord(id: number): Promise<void>;
+  // スキャン進捗
+  getScanProgress(): Promise<ScanProgress | undefined>;
+  updateScanProgress(lastScannedId: number): Promise<void>;
+  // スキャン候補
+  getReviewsForScan(afterId: number): Promise<Review[]>;
+  addScanCandidate(reviewId: number, spamScore: number, reasons: string[], aiChecked: boolean): Promise<void>;
+  getScanCandidates(): Promise<(ScanCandidate & { review: Review })[]>;
+  deleteScanCandidates(reviewIds: number[]): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -61,6 +77,58 @@ export class DatabaseStorage implements IStorage {
 
   async deleteReview(id: number): Promise<void> {
     await db.delete(reviews).where(eq(reviews.id, id));
+  }
+
+  async getNgWords(): Promise<NgWord[]> {
+    return db.select().from(ngWords).orderBy(desc(ngWords.createdAt));
+  }
+
+  async addNgWord(word: InsertNgWord): Promise<NgWord> {
+    const [created] = await db.insert(ngWords).values(word).returning();
+    return created;
+  }
+
+  async deleteNgWord(id: number): Promise<void> {
+    await db.delete(ngWords).where(eq(ngWords.id, id));
+  }
+
+  async getScanProgress(): Promise<ScanProgress | undefined> {
+    const [row] = await db.select().from(scanProgress).where(eq(scanProgress.id, 1));
+    return row;
+  }
+
+  async updateScanProgress(lastScannedId: number): Promise<void> {
+    await db
+      .insert(scanProgress)
+      .values({ id: 1, lastScannedId, updatedAt: new Date() })
+      .onConflictDoUpdate({
+        target: scanProgress.id,
+        set: { lastScannedId, updatedAt: new Date() },
+      });
+  }
+
+  async getReviewsForScan(afterId: number): Promise<Review[]> {
+    return db.select().from(reviews).where(gt(reviews.id, afterId)).orderBy(reviews.id);
+  }
+
+  async addScanCandidate(reviewId: number, spamScore: number, reasons: string[], aiChecked: boolean): Promise<void> {
+    await db.insert(scanCandidates).values({ reviewId, spamScore, reasons, aiChecked });
+  }
+
+  async getScanCandidates(): Promise<(ScanCandidate & { review: Review })[]> {
+    const rows = await db
+      .select()
+      .from(scanCandidates)
+      .innerJoin(reviews, eq(scanCandidates.reviewId, reviews.id))
+      .orderBy(desc(reviews.id));
+    return rows.map((r) => ({ ...r.scan_candidates, review: r.reviews }));
+  }
+
+  async deleteScanCandidates(reviewIds: number[]): Promise<void> {
+    for (const reviewId of reviewIds) {
+      await db.delete(reviews).where(eq(reviews.id, reviewId));
+      // reviewのdeleteでON DELETE CASCADEによりscan_candidatesも削除される
+    }
   }
 }
 
