@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Star, Trash2, Search, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Star,
+  Trash2,
+  Search,
+  Loader2,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -61,9 +69,14 @@ export default function ReviewsPage() {
   const { data, isLoading } = useQuery<ReviewsResponse>({
     queryKey: ["/api/reviews", page, debouncedSearch],
     queryFn: async () => {
-      const params = new URLSearchParams({ page: String(page), limit: String(LIMIT) });
+      const params = new URLSearchParams({
+        page: String(page),
+        limit: String(LIMIT),
+      });
       if (debouncedSearch) params.set("search", debouncedSearch);
-      const res = await fetch(`/api/reviews?${params}`, { credentials: "include" });
+      const res = await fetch(`/api/reviews?${params}`, {
+        credentials: "include",
+      });
       if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
       return res.json();
     },
@@ -91,7 +104,9 @@ export default function ReviewsPage() {
       {/* ヘッダー */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-xl font-semibold text-foreground">レビュー管理</h2>
+          <h2 className="text-xl font-semibold text-foreground">
+            レビュー管理
+          </h2>
           <p className="text-sm text-muted-foreground mt-0.5">
             {isLoading ? "読み込み中..." : `${from}〜${to} 件 / 全 ${total} 件`}
           </p>
@@ -123,12 +138,16 @@ export default function ReviewsPage() {
             <thead className="bg-muted/50 text-muted-foreground">
               <tr>
                 <th className="px-4 py-3 text-left font-medium">ID</th>
-                <th className="px-4 py-3 text-left font-medium">商品ID</th>
-                <th className="px-4 py-3 text-left font-medium">ニックネーム</th>
+                <th className="px-4 py-3 text-left font-medium">商品</th>
+                <th className="px-4 py-3 text-left font-medium">
+                  ニックネーム
+                </th>
                 <th className="px-4 py-3 text-left font-medium">評価</th>
                 <th className="px-4 py-3 text-left font-medium">タイトル</th>
                 <th className="px-4 py-3 text-left font-medium">コメント</th>
-                <th className="px-4 py-3 text-left font-medium whitespace-nowrap">投稿日時</th>
+                <th className="px-4 py-3 text-left font-medium whitespace-nowrap">
+                  投稿日時
+                </th>
                 <th className="px-4 py-3 text-right font-medium">操作</th>
               </tr>
             </thead>
@@ -138,15 +157,22 @@ export default function ReviewsPage() {
                   key={review.id}
                   className="bg-background hover:bg-muted/30 transition-colors"
                 >
-                  <td className="px-4 py-3 text-muted-foreground">{review.id}</td>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    {review.id}
+                  </td>
                   <td className="px-4 py-3">
                     <a
                       href={`https://kawkaw.app/product/${review.productId}`}
                       target="_blank"
+                      className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground hover:text-foreground"
                       rel="noopener noreferrer"
                     >
-                      <Badge variant="outline" className="font-mono text-xs hover:bg-muted cursor-pointer">
+                      <Badge
+                        variant="outline"
+                        className="font-mono text-xs hover:bg-muted cursor-pointer"
+                      >
                         {review.productId}
+                        <ExternalLink className="ml-1 w-3 h-3" />
                       </Badge>
                     </a>
                   </td>
@@ -154,7 +180,10 @@ export default function ReviewsPage() {
                   <td className="px-4 py-3">
                     <StarRating rating={review.rating} />
                   </td>
-                  <td className="px-4 py-3 max-w-[180px] truncate" title={review.title}>
+                  <td
+                    className="px-4 py-3 max-w-[180px] truncate"
+                    title={review.title}
+                  >
                     {review.title}
                   </td>
                   <td
@@ -225,7 +254,8 @@ export default function ReviewsPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>レビューを削除しますか？</AlertDialogTitle>
             <AlertDialogDescription>
-              この操作は取り消せません。レビュー (ID: {deleteTargetId}) を完全に削除します。
+              この操作は取り消せません。レビュー (ID: {deleteTargetId})
+              を完全に削除します。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
