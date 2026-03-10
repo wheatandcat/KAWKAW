@@ -24,7 +24,7 @@ function getTimeSaleProducts(): (Product & { extraDiscount: number; soldPercent:
   const seed = Math.floor(Date.now() / (1000 * 60 * 60));
   const rng = (i: number) => ((seed * 9301 + 49297 + i * 1259) % 233280) / 233280;
 
-  const sorted = [...products].sort((a, b) => rng(parseInt(a.id)) - rng(parseInt(b.id)));
+  const sorted = [...products].filter((p) => !p.disabled).sort((a, b) => rng(parseInt(a.id)) - rng(parseInt(b.id)));
   const selected = sorted.slice(0, 12);
 
   return selected.map((p, i) => {

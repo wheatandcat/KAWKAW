@@ -19,7 +19,7 @@ function getDailyDeals(): {
   const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
   const rng = (i: number) => ((dayOfYear * 9301 + 49297 + i * 1259) % 233280) / 233280;
 
-  const shuffled = [...products].sort((a, b) => rng(parseInt(a.id)) - rng(parseInt(b.id)));
+  const shuffled = [...products].filter((p) => !p.disabled).sort((a, b) => rng(parseInt(a.id)) - rng(parseInt(b.id)));
 
   const withDiscount = (p: Product, i: number) => ({
     ...p,

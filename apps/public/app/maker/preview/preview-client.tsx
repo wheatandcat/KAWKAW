@@ -102,12 +102,29 @@ export function PreviewClient() {
   const tweetText = `${name} #カウカウメーカー`;
   const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
 
-  const saveAndProceed = () => {
+  const saveAndProceed = async () => {
     if (!capturedBlob) return;
+
+    const file = new File([capturedBlob], "kawkaw-product.png", {
+      type: "image/png",
+    });
+
+    if (
+      typeof navigator.canShare === "function" &&
+      navigator.canShare({ files: [file] })
+    ) {
+      try {
+        await navigator.share({ files: [file], text: tweetText });
+        setDialogOpen(false);
+        return;
+      } catch (err) {
+        if ((err as Error).name === "AbortError") return;
+      }
+    }
+
     downloadImage(capturedBlob);
     setDialogStep("saved");
   };
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -359,16 +376,13 @@ export function PreviewClient() {
             disabled={isCapturing}
           >
             <Twitter className="w-5 h-5" />
-            {isCapturing
-              ? "スクリーンショット作成中..."
-              : "スクリーンショットを撮ってXに投稿"}
+            {isCapturing ? "画像を作成中..." : "画像を保存してXに投稿"}
           </Button>
           <p className="text-xs text-muted-foreground text-center">
             <span className="font-bold">#カウカウメーカー</span>
             でSNSに投稿された商品はカウカウで輸入する可能性があるのでご容赦ください。
           </p>
         </div>
-
       </div>
 
       {/* スクリーンショット確認ダイアログ */}
