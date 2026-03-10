@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "カウカウ - 架空のショッピングサイト",
@@ -25,9 +26,10 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <div className="min-h-screen bg-background">
+          <div className="min-h-screen bg-background flex flex-col">
             <Header />
-            {children}
+            <main className="flex-1">{children}</main>
+            <Footer />
           </div>
         </Providers>
       </body>

@@ -5,7 +5,14 @@ import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, TrendingUp, Zap, Gift, Search, RefreshCw } from "lucide-react";
+import {
+  Sparkles,
+  TrendingUp,
+  Zap,
+  Gift,
+  Search,
+  RefreshCw,
+} from "lucide-react";
 import { useCartContext } from "@/lib/cart-context";
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -23,7 +30,9 @@ export default function HomeClient() {
   const activeProducts = useMemo(() => products.filter((p) => !p.disabled), []);
 
   // SSR と hydration を一致させるため初期表示は安定した順序にする
-  const [displayProducts, setDisplayProducts] = useState(() => activeProducts.slice(0, 20));
+  const [displayProducts, setDisplayProducts] = useState(() =>
+    activeProducts.slice(0, 20),
+  );
 
   // hydration 後にのみシャッフル
   useEffect(() => {
@@ -44,7 +53,13 @@ export default function HomeClient() {
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery, isFiltering, displayProducts, activeProducts]);
+  }, [
+    selectedCategory,
+    searchQuery,
+    isFiltering,
+    displayProducts,
+    activeProducts,
+  ]);
 
   const handleShuffle = useCallback(() => {
     setDisplayProducts(shuffleArray(activeProducts).slice(0, 20));
@@ -106,10 +121,19 @@ export default function HomeClient() {
         <div className="flex items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-2 flex-wrap">
             <h2 className="text-base font-semibold text-foreground">
-              {isFiltering ? selectedCategory === "すべて" ? "検索結果" : selectedCategory : "おすすめ商品"}
+              {isFiltering
+                ? selectedCategory === "すべて"
+                  ? "検索結果"
+                  : selectedCategory
+                : "おすすめ商品"}
             </h2>
-            <Badge variant="secondary" className="no-default-hover-elevate no-default-active-elevate">
-              {isFiltering ? `${filteredProducts.length}件` : `${filteredProducts.length}件 / ${activeProducts.length}件中`}
+            <Badge
+              variant="secondary"
+              className="no-default-hover-elevate no-default-active-elevate"
+            >
+              {isFiltering
+                ? `${filteredProducts.length}件`
+                : `${filteredProducts.length}件 / ${activeProducts.length}件中`}
             </Badge>
           </div>
           {!isFiltering && (
@@ -129,7 +153,9 @@ export default function HomeClient() {
         {filteredProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Search className="w-16 h-16 text-muted-foreground/40 mb-4" />
-            <p className="text-lg font-medium text-foreground">商品が見つかりません</p>
+            <p className="text-lg font-medium text-foreground">
+              商品が見つかりません
+            </p>
             <p className="text-sm text-muted-foreground mt-1">
               検索条件を変更してお試しください
             </p>
@@ -150,10 +176,11 @@ export default function HomeClient() {
       <footer className="border-t bg-card py-6 mt-8">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-xs text-muted-foreground">
-            カウカウ.fake - これは架空の通販サイトです。実際の商品は存在しません。
+            カウカウ.fake -
+            これは架空の通販サイトです。実際の商品は存在しません。
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            買い物依存症の防止を目的としたシミュレーションサービスです。
+            買い物衝動の抑制を目的としたシミュレーションサービスです。
           </p>
         </div>
       </footer>
