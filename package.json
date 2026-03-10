@@ -12,5 +12,8 @@
     "build:public": "npm -w apps/public run build",
     "build:admin": "npm -w apps/admin run build",
     "db:push": "npm -w packages/database run db:push"
+  },
+  "dependencies": {
+    "html-to-image": "^1.11.13"
   }
 }
