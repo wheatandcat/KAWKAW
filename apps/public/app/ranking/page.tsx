@@ -20,7 +20,7 @@ export default function RankingPage() {
 
   const rankedProducts = useMemo(() => {
     let filtered = products.filter((p) =>
-      selectedCategory === "すべて" || p.category === selectedCategory
+      !p.disabled && (selectedCategory === "すべて" || p.category === selectedCategory)
     );
 
     switch (sortMode) {

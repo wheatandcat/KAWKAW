@@ -57,7 +57,7 @@ export default function MediaPage() {
           </p>
           <p>
             <Link
-              href="#"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeSBNpO4RfVHCPaorIxO8Ue0_or1jY1kJDSICuJ0hKY_pKHUg/viewform"
               className="underline text-blue-600 hover:text-blue-800"
             >
               &gt;メディア掲載の連絡をする
@@ -72,7 +72,7 @@ export default function MediaPage() {
           </p>
           <p>
             <Link
-              href="#"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeSBNpO4RfVHCPaorIxO8Ue0_or1jY1kJDSICuJ0hKY_pKHUg/viewform"
               className="underline text-blue-600 hover:text-blue-800"
             >
               &gt;取材の相談をする

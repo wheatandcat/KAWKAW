@@ -16,6 +16,7 @@ function getNewArrivals(): (Product & { daysAgo: number; isNew: boolean; isHot: 
   const rng = (i: number) => ((dayOfYear * 7919 + 104729 + i * 1637) % 233280) / 233280;
 
   return [...products]
+    .filter((p) => !p.disabled)
     .map((p) => {
       const daysAgo = Math.floor(rng(parseInt(p.id) * 3) * 30);
       const isNew = daysAgo <= 7;
