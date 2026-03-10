@@ -1821,6 +1821,7 @@ export const products: Product[] = [
     image: "scan",
     rating: 3.2,
     reviewCount: 8765,
+    disabled: true,
   },
   {
     id: "130",
