@@ -35,6 +35,13 @@ export default {
     const isPrefetch = request.headers.get("Next-Router-Prefetch") === "1";
 
     const cacheUrl = new URL(request.url);
+
+    // /maker/preview はサーバーが返すHTMLがクエリパラメータに依存しない
+    // (全てクライアントサイドで処理) のでクエリパラメータをキャッシュキーから除外する
+    if (url.pathname === "/maker/preview") {
+      cacheUrl.search = "";
+    }
+
     if (isRSC) cacheUrl.searchParams.set("__cf_rsc", "1");
     if (isPrefetch) cacheUrl.searchParams.set("__cf_prefetch", "1");
 
