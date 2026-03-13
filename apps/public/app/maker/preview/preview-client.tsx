@@ -144,7 +144,7 @@ export function PreviewClient() {
                 もう一度作る
               </Button>
             </Link>
-            <Link href={`/maker?${searchParams.toString()}`}>
+            <Link href={`/maker/create?${searchParams.toString()}`}>
               <Button variant="outline" size="sm" className="gap-1">
                 <Pencil className="w-3 h-3" />
                 編集

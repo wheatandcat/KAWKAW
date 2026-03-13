@@ -65,9 +65,9 @@ export default {
 
     const cacheUrl = new URL(request.url);
 
-    // /maker/preview はサーバーが返すHTMLがクエリパラメータに依存しない
+    // /maker/preview, /maker/create はサーバーが返すHTMLがクエリパラメータに依存しない
     // (全てクライアントサイドで処理) のでクエリパラメータをキャッシュキーから除外する
-    if (url.pathname === "/maker/preview") {
+    if (url.pathname === "/maker/preview" || url.pathname === "/maker/create") {
       cacheUrl.search = "";
     }
 
