@@ -3,5 +3,6 @@ main = "worker.js"
 compatibility_date = "2025-01-01"
 
 routes = [
-  { pattern = "kawkaw.app/*", zone_name = "kawkaw.app" }
+  { pattern = "kawkaw.app/*", zone_name = "kawkaw.app" },
+  { pattern = "cdn.kawkaw.app/*", zone_name = "kawkaw.app" }
 ]
