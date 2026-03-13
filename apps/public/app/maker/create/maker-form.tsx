@@ -149,7 +149,9 @@ export function MakerForm() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="name">商品名 *</Label>
-              <span className={`text-xs ${form.name.length > 35 ? "text-destructive" : "text-muted-foreground"}`}>
+              <span
+                className={`text-xs ${form.name.length > 35 ? "text-destructive" : "text-muted-foreground"}`}
+              >
                 {form.name.length}/35
               </span>
             </div>
@@ -157,7 +159,9 @@ export function MakerForm() {
               id="name"
               placeholder="例: 夢の中で動くロボット掃除機"
               value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value.slice(0, 35) })}
+              onChange={(e) =>
+                setForm({ ...form, name: e.target.value.slice(0, 35) })
+              }
               required
             />
           </div>
@@ -194,7 +198,9 @@ export function MakerForm() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="description">商品説明 *</Label>
-              <span className={`text-xs ${form.description.length > 256 ? "text-destructive" : "text-muted-foreground"}`}>
+              <span
+                className={`text-xs ${form.description.length > 256 ? "text-destructive" : "text-muted-foreground"}`}
+              >
                 {form.description.length}/256
               </span>
             </div>
@@ -242,7 +248,9 @@ export function MakerForm() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="badge">バッジ（任意）</Label>
-              <span className={`text-xs ${form.badge.length > 10 ? "text-destructive" : "text-muted-foreground"}`}>
+              <span
+                className={`text-xs ${form.badge.length > 10 ? "text-destructive" : "text-muted-foreground"}`}
+              >
                 {form.badge.length}/10
               </span>
             </div>
@@ -250,7 +258,9 @@ export function MakerForm() {
               id="badge"
               placeholder="例: 新発売、期間限定"
               value={form.badge}
-              onChange={(e) => setForm({ ...form, badge: e.target.value.slice(0, 10) })}
+              onChange={(e) =>
+                setForm({ ...form, badge: e.target.value.slice(0, 10) })
+              }
             />
           </div>
 

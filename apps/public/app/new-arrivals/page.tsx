@@ -23,7 +23,7 @@ function getNewArrivals(): (Product & { daysAgo: number; isNew: boolean; isHot: 
       const isHot = rng(parseInt(p.id) * 5 + 1) > 0.7;
       return { ...p, daysAgo, isNew, isHot };
     })
-    .sort((a, b) => a.daysAgo - b.daysAgo);
+    .sort((a, b) => parseInt(b.id) - parseInt(a.id));
 }
 
 function formatDaysAgo(days: number): string {

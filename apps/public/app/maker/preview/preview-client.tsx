@@ -387,7 +387,7 @@ export function PreviewClient() {
           </Button>
           <p className="text-xs text-muted-foreground text-center">
             <span className="font-bold">#カウカウメーカー</span>
-            でSNSに投稿された商品はカウカウで輸入する可能性があるのでご容赦ください。
+            でSNSに投稿された商品はカウカウで逆輸入する可能性があるのでご容赦ください。
           </p>
         </div>
       </div>

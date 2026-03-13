@@ -13,6 +13,7 @@ import {
   Clock,
   PackagePlus,
   ShieldAlert,
+  Wand2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,6 +54,17 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 ml-auto flex-wrap">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-yellow-300 gap-1 hidden md:flex relative"
+            onClick={() => router.push("/maker")}
+            data-testid="link-maker"
+          >
+            <Wand2 className="w-5 h-5" />
+            <span className="text-xs">メーカー</span>
+          </Button>
+
           <Button
             variant="ghost"
             size="sm"
@@ -123,6 +135,22 @@ export function Header() {
               data-testid="input-search-mobile"
             />
           </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-yellow-300 gap-2 w-full justify-start relative"
+            onClick={() => {
+              router.push("/maker");
+              setMobileMenuOpen(false);
+            }}
+            data-testid="link-maker-mobile"
+          >
+            <Wand2 className="w-4 h-4" />
+            メーカー
+            <span className="ml-1 bg-red-500 text-white text-[9px] font-bold px-1 rounded-sm leading-4">
+              NEW
+            </span>
+          </Button>
           <Button
             variant="ghost"
             size="sm"
@@ -204,6 +232,15 @@ export function Header() {
       <div className="bg-[#232f3e] px-4 py-1.5 text-xs text-gray-300 hidden md:block">
         <div className="flex items-center gap-4 flex-wrap">
           <span className="font-medium text-white">全品架空</span>
+          <span
+            className="cursor-pointer hover:text-white text-yellow-300 relative inline-flex items-center gap-1"
+            onClick={() => router.push("/maker")}
+          >
+            メーカー
+            <span className="bg-red-500 text-white text-[9px] font-bold px-1 rounded-sm leading-4">
+              NEW
+            </span>
+          </span>
           <span
             className="cursor-pointer hover:text-white"
             onClick={() => router.push("/deals")}

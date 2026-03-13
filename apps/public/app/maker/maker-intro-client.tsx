@@ -40,7 +40,8 @@ export function MakerAiSection() {
       />
 
       <p className="text-sm text-muted-foreground leading-relaxed">
-        Google の <strong>Gemini</strong> に専用の Gem（カスタム AI）を作ると、ひと言指示するだけでカウカウメーカー用のリンクが自動生成されます。
+        Google の <strong>Gemini</strong> に専用の Gem（カスタム
+        AI）を作ると、ひと言指示するだけでカウカウメーカー用のリンクが自動生成されます。
       </p>
 
       <ol className="space-y-5 text-sm">
@@ -118,9 +119,7 @@ export function MakerAiSection() {
         {/* Step 3 */}
         <li className="space-y-2">
           <p className="font-semibold">3. Gem に話しかけるだけ</p>
-          <p className="text-muted-foreground">
-            作成した Gem に
-          </p>
+          <p className="text-muted-foreground">作成した Gem に</p>
           <p className="rounded-md border bg-background px-3 py-2 text-xs font-mono">
             カウカウっぽい家具商品を作って
           </p>
