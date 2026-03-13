@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,7 +9,11 @@ import { ProductIcon } from "@/components/product-icon";
 import { useCartContext } from "@/lib/cart-context";
 
 export default function CheckoutComplete() {
-  const { lastOrder } = useCartContext();
+  const { lastOrder, resetCheckingOut } = useCartContext();
+
+  useEffect(() => {
+    resetCheckingOut();
+  }, [resetCheckingOut]);
 
   if (!lastOrder) {
     return (

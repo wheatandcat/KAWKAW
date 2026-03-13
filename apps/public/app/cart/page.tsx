@@ -8,8 +8,17 @@ import { ProductIcon } from "@/components/product-icon";
 import { useCartContext } from "@/lib/cart-context";
 
 export default function CartPage() {
-  const { cart, cartTotal, updateQuantity, removeFromCart, handleCheckout } =
+  const { cart, cartTotal, updateQuantity, removeFromCart, handleCheckout, isCheckingOut } =
     useCartContext();
+
+  if (isCheckingOut) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center px-4">
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-sm text-muted-foreground">処理中...</p>
+      </div>
+    );
+  }
 
   if (cart.length === 0) {
     return (
