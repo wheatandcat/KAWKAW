@@ -26,6 +26,9 @@ export default function MakerIntroPage() {
             <br />
             実際には販売されません。
           </p>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            SNSに投稿された商品は逆輸入する可能性があります。
+          </p>
         </div>
 
         <Button asChild size="lg" className="w-full gap-2">
