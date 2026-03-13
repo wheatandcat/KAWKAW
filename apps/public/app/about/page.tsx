@@ -21,7 +21,7 @@ export default function AboutPage() {
         </p>
         <p>
           <Link
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeSBNpO4RfVHCPaorIxO8Ue0_or1jY1kJDSICuJ0hKY_pKHUg/viewform"
+            href="/media"
             className="underline text-blue-600 hover:text-blue-800"
           >
             メディア掲載、取材の問合せはこちら

@@ -14,11 +14,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import {
-  Star,
   ChevronLeft,
-  Truck,
-  Shield,
-  RotateCcw,
   Wand2,
   Twitter,
   Download,
@@ -41,6 +37,9 @@ export function PreviewClient() {
   const [capturedBlob, setCapturedBlob] = useState<Blob | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogStep, setDialogStep] = useState<"preview" | "saved">("preview");
+  const isIOS =
+    typeof navigator !== "undefined" &&
+    /iPhone|iPad|iPod/.test(navigator.userAgent);
 
   const name = searchParams.get("name") || "架空の商品";
   const price = Number(searchParams.get("price")) || 9800;
@@ -94,7 +93,7 @@ export function PreviewClient() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "kawkaw-product.png";
+    a.download = `kawkaw-maker_${name}.png`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -105,11 +104,12 @@ export function PreviewClient() {
   const saveAndProceed = async () => {
     if (!capturedBlob) return;
 
-    const file = new File([capturedBlob], "kawkaw-product.png", {
+    const file = new File([capturedBlob], `kawkaw-maker_${name}.png`, {
       type: "image/png",
     });
 
     if (
+      isIOS &&
       typeof navigator.canShare === "function" &&
       navigator.canShare({ files: [file] })
     ) {
@@ -129,7 +129,10 @@ export function PreviewClient() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between mb-6">
+        <div
+          className="flex items-center justify-between mb-6"
+          style={{ maxWidth: CAPTURE_W }}
+        >
           <div className="flex items-center gap-2">
             <Link href="/maker">
               <Button
@@ -376,11 +379,15 @@ export function PreviewClient() {
             disabled={isCapturing}
           >
             <Twitter className="w-5 h-5" />
-            {isCapturing ? "画像を作成中..." : "画像を保存してXに投稿"}
+            {isCapturing
+              ? "画像を作成中..."
+              : isIOS
+                ? "画像を共有する"
+                : "画像を保存してXに投稿"}
           </Button>
           <p className="text-xs text-muted-foreground text-center">
             <span className="font-bold">#カウカウメーカー</span>
-            でSNSに投稿された商品はカウカウで輸入する可能性があるのでご容赦ください。
+            でSNSに投稿された商品はカウカウで逆輸入する可能性があるのでご容赦ください。
           </p>
         </div>
       </div>
@@ -409,7 +416,7 @@ export function PreviewClient() {
               <DialogFooter className="gap-2 flex-col sm:flex-col">
                 <Button className="w-full gap-2" onClick={saveAndProceed}>
                   <Twitter className="w-4 h-4" />
-                  Xに投稿する
+                  {isIOS ? "共有する" : "Xに投稿する"}
                 </Button>
                 <Button
                   variant="outline"

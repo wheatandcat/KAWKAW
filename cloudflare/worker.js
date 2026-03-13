@@ -13,6 +13,35 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // cdn.kawkaw.app: R2 静的アセットのキャッシュ
+    if (url.hostname === "cdn.kawkaw.app") {
+      if (request.method !== "GET") return fetch(request);
+
+      const cache = caches.default;
+      const cached = await cache.match(request);
+      if (cached) {
+        const res = new Response(cached.body, cached);
+        res.headers.set("X-CF-Cache", "HIT");
+        return res;
+      }
+
+      const response = await fetch(request);
+      if (response.status !== 200) return response;
+
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      headers.set("X-CF-Cache", "MISS");
+
+      const responseToCache = new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+
+      ctx.waitUntil(cache.put(request, responseToCache.clone()));
+      return responseToCache;
+    }
+
     // 診断用エンドポイント (Worker が動いているか確認)
     if (url.pathname === "/__worker_check") {
       return new Response("Worker is running!", {
