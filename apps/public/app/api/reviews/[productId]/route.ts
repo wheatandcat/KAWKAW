@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { unstable_cache } from "next/cache";
 import { storage } from "@kawkaw/database";
 
 export async function GET(
@@ -6,10 +7,11 @@ export async function GET(
   { params }: { params: Promise<{ productId: string }> }
 ) {
   const { productId } = await params;
-  const reviews = await storage.getReviewsByProductId(productId);
-  return NextResponse.json(reviews, {
-    headers: {
-      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=3600",
-    },
-  });
+  const getCachedReviews = unstable_cache(
+    () => storage.getReviewsByProductId(productId),
+    [`reviews-${productId}`],
+    { tags: [`reviews-${productId}`] }
+  );
+  const reviews = await getCachedReviews();
+  return NextResponse.json(reviews);
 }
