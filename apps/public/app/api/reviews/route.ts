@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { storage, insertReviewSchema } from "@kawkaw/database";
 import { moderateText } from "@/server/moderation";
 
@@ -23,5 +24,6 @@ export async function POST(req: Request) {
   }
 
   const review = await storage.createReview(parsed.data);
+  revalidateTag(`reviews-${parsed.data.productId}`);
   return NextResponse.json(review, { status: 201 });
 }

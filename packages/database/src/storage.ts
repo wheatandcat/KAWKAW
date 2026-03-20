@@ -14,7 +14,7 @@ export interface IStorage {
   getReviewsByProductId(productId: string): Promise<Review[]>;
   createReview(review: InsertReview): Promise<Review>;
   getAllReviews(search?: string, page?: number, limit?: number): Promise<{ reviews: Review[]; total: number }>;
-  deleteReview(id: number): Promise<void>;
+  deleteReview(id: number): Promise<Review | undefined>;
   // NGワード
   getNgWords(): Promise<NgWord[]>;
   addNgWord(word: InsertNgWord): Promise<NgWord>;
@@ -75,8 +75,9 @@ export class DatabaseStorage implements IStorage {
     return { reviews: items, total };
   }
 
-  async deleteReview(id: number): Promise<void> {
-    await db.delete(reviews).where(eq(reviews.id, id));
+  async deleteReview(id: number): Promise<Review | undefined> {
+    const [deleted] = await db.delete(reviews).where(eq(reviews.id, id)).returning();
+    return deleted;
   }
 
   async getNgWords(): Promise<NgWord[]> {
