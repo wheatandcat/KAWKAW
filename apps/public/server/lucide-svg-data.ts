@@ -1,3 +1,4 @@
+// OG画像生成用のSVGデータ。新しいアイコンを追加する場合は lib/icon-registry.ts にも追加すること。
 interface SvgElement { tag: string; props: Record<string, string>; }
 
 export const lucideIconSvgData: Record<string, SvgElement[]> = {
@@ -2306,5 +2307,149 @@ export const lucideIconSvgData: Record<string, SvgElement[]> = {
         "d": "m7.5 4.27 9 5.15"
       }
     }
+  ],
+  "wand2": [
+    { "tag": "path", "props": { "d": "m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" } },
+    { "tag": "path", "props": { "d": "m14 7 3 3" } },
+    { "tag": "path", "props": { "d": "M5 6v4" } },
+    { "tag": "path", "props": { "d": "M19 14v4" } },
+    { "tag": "path", "props": { "d": "M10 2v2" } },
+    { "tag": "path", "props": { "d": "M7 8H3" } },
+    { "tag": "path", "props": { "d": "M21 16h-4" } },
+    { "tag": "path", "props": { "d": "M11 3H9" } }
+  ],
+  "keyboard": [
+    { "tag": "path", "props": { "d": "M10 8h.01" } },
+    { "tag": "path", "props": { "d": "M12 12h.01" } },
+    { "tag": "path", "props": { "d": "M14 8h.01" } },
+    { "tag": "path", "props": { "d": "M16 12h.01" } },
+    { "tag": "path", "props": { "d": "M18 8h.01" } },
+    { "tag": "path", "props": { "d": "M6 8h.01" } },
+    { "tag": "path", "props": { "d": "M7 16h10" } },
+    { "tag": "path", "props": { "d": "M8 12h.01" } },
+    { "tag": "rect", "props": { "width": "20", "height": "16", "x": "2", "y": "4", "rx": "2" } }
+  ],
+  "clock": [
+    { "tag": "circle", "props": { "cx": "12", "cy": "12", "r": "10" } },
+    { "tag": "polyline", "props": { "points": "12 6 12 12 16 14" } }
+  ],
+  "user": [
+    { "tag": "path", "props": { "d": "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" } },
+    { "tag": "circle", "props": { "cx": "12", "cy": "7", "r": "4" } }
+  ],
+  "clapperboard": [
+    { "tag": "path", "props": { "d": "M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z" } },
+    { "tag": "path", "props": { "d": "m6.2 5.3 3.1 3.9" } },
+    { "tag": "path", "props": { "d": "m12.4 3.4 3.1 4" } },
+    { "tag": "path", "props": { "d": "M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" } }
+  ],
+  "bot": [
+    { "tag": "path", "props": { "d": "M12 8V4H8" } },
+    { "tag": "rect", "props": { "width": "16", "height": "12", "x": "4", "y": "8", "rx": "2" } },
+    { "tag": "path", "props": { "d": "M2 14h2" } },
+    { "tag": "path", "props": { "d": "M20 14h2" } },
+    { "tag": "path", "props": { "d": "M15 13v2" } },
+    { "tag": "path", "props": { "d": "M9 13v2" } }
+  ],
+  "navigation": [
+    { "tag": "polygon", "props": { "points": "3 11 22 2 13 21 11 13 3 11" } }
+  ],
+  "hand": [
+    { "tag": "path", "props": { "d": "M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" } },
+    { "tag": "path", "props": { "d": "M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" } },
+    { "tag": "path", "props": { "d": "M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" } },
+    { "tag": "path", "props": { "d": "M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" } }
+  ],
+  "box": [
+    { "tag": "path", "props": { "d": "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" } },
+    { "tag": "path", "props": { "d": "m3.3 7 8.7 5 8.7-5" } },
+    { "tag": "path", "props": { "d": "M12 22V12" } }
+  ],
+  "ticket": [
+    { "tag": "path", "props": { "d": "M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" } },
+    { "tag": "path", "props": { "d": "M13 5v2" } },
+    { "tag": "path", "props": { "d": "M13 17v2" } },
+    { "tag": "path", "props": { "d": "M13 11v2" } }
+  ],
+  "plane": [
+    { "tag": "path", "props": { "d": "M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" } }
+  ],
+  "table-2": [
+    { "tag": "path", "props": { "d": "M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" } }
+  ],
+  "pie": [
+    { "tag": "path", "props": { "d": "M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" } },
+    { "tag": "path", "props": { "d": "M21.21 15.89A10 10 0 1 1 8 2.83" } }
+  ],
+  "bookmark": [
+    { "tag": "path", "props": { "d": "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" } }
+  ],
+  "book-type": [
+    { "tag": "path", "props": { "d": "M10 13h4" } },
+    { "tag": "path", "props": { "d": "M12 6v7" } },
+    { "tag": "path", "props": { "d": "M16 8V6H8v2" } },
+    { "tag": "path", "props": { "d": "M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" } }
+  ],
+  "languages": [
+    { "tag": "path", "props": { "d": "m5 8 6 6" } },
+    { "tag": "path", "props": { "d": "m4 14 6-6 2-3" } },
+    { "tag": "path", "props": { "d": "M2 5h12" } },
+    { "tag": "path", "props": { "d": "M7 2h1" } },
+    { "tag": "path", "props": { "d": "m22 22-5-10-5 10" } },
+    { "tag": "path", "props": { "d": "M14 18h6" } }
+  ],
+  "tv-2": [
+    { "tag": "path", "props": { "d": "M7 21h10" } },
+    { "tag": "rect", "props": { "width": "20", "height": "14", "x": "2", "y": "3", "rx": "2" } }
+  ],
+  "frame": [
+    { "tag": "line", "props": { "x1": "22", "x2": "2", "y1": "6", "y2": "6" } },
+    { "tag": "line", "props": { "x1": "22", "x2": "2", "y1": "18", "y2": "18" } },
+    { "tag": "line", "props": { "x1": "6", "x2": "6", "y1": "2", "y2": "22" } },
+    { "tag": "line", "props": { "x1": "18", "x2": "18", "y1": "2", "y2": "22" } }
+  ],
+  "cooking-pot": [
+    { "tag": "path", "props": { "d": "M2 12h20" } },
+    { "tag": "path", "props": { "d": "M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" } },
+    { "tag": "path", "props": { "d": "m4 8 16-4" } },
+    { "tag": "path", "props": { "d": "m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" } }
+  ],
+  "waves": [
+    { "tag": "path", "props": { "d": "M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" } },
+    { "tag": "path", "props": { "d": "M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" } },
+    { "tag": "path", "props": { "d": "M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" } }
+  ],
+  "door-open": [
+    { "tag": "path", "props": { "d": "M13 4h3a2 2 0 0 1 2 2v14" } },
+    { "tag": "path", "props": { "d": "M2 20h3" } },
+    { "tag": "path", "props": { "d": "M13 20h9" } },
+    { "tag": "path", "props": { "d": "M10 12v.01" } },
+    { "tag": "path", "props": { "d": "M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" } }
+  ],
+  "cloud-sun": [
+    { "tag": "path", "props": { "d": "M12 2v2" } },
+    { "tag": "path", "props": { "d": "m4.93 4.93 1.41 1.41" } },
+    { "tag": "path", "props": { "d": "M20 12h2" } },
+    { "tag": "path", "props": { "d": "m19.07 4.93-1.41 1.41" } },
+    { "tag": "path", "props": { "d": "M15.947 12.65a4 4 0 0 0-5.925-4.128" } },
+    { "tag": "path", "props": { "d": "M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" } }
+  ],
+  "armchair": [
+    { "tag": "path", "props": { "d": "M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" } },
+    { "tag": "path", "props": { "d": "M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" } },
+    { "tag": "path", "props": { "d": "M5 18v2" } },
+    { "tag": "path", "props": { "d": "M19 18v2" } }
+  ],
+  "hammer": [
+    { "tag": "path", "props": { "d": "m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9" } },
+    { "tag": "path", "props": { "d": "m18 15 4-4" } },
+    { "tag": "path", "props": { "d": "m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" } }
+  ],
+  "luggage": [
+    { "tag": "path", "props": { "d": "M6 20a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2" } },
+    { "tag": "path", "props": { "d": "M8 18V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14" } },
+    { "tag": "path", "props": { "d": "M10 20h4" } },
+    { "tag": "circle", "props": { "cx": "16", "cy": "20", "r": "2" } },
+    { "tag": "circle", "props": { "cx": "8", "cy": "20", "r": "2" } }
   ]
 };
