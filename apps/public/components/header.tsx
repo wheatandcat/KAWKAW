@@ -147,9 +147,6 @@ export function Header() {
           >
             <Wand2 className="w-4 h-4" />
             メーカー
-            <span className="ml-1 bg-red-500 text-white text-[9px] font-bold px-1 rounded-sm leading-4">
-              NEW
-            </span>
           </Button>
           <Button
             variant="ghost"
@@ -237,9 +234,6 @@ export function Header() {
             onClick={() => router.push("/maker")}
           >
             メーカー
-            <span className="bg-red-500 text-white text-[9px] font-bold px-1 rounded-sm leading-4">
-              NEW
-            </span>
           </span>
           <span
             className="cursor-pointer hover:text-white"
