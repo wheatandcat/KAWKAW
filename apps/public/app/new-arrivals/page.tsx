@@ -50,9 +50,17 @@ export default function NewArrivalsPage() {
     toast({ title: "カートに追加しました", description: name });
   };
 
-  const todayItems = filtered.filter((p) => p.daysAgo === 0);
-  const thisWeekItems = filtered.filter((p) => p.daysAgo >= 1 && p.daysAgo <= 7);
-  const olderItems = filtered.filter((p) => p.daysAgo > 7);
+  const latestProductIds = new Set(
+    [...products]
+      .filter((p) => !p.disabled)
+      .sort((a, b) => parseInt(b.id) - parseInt(a.id))
+      .slice(0, 15)
+      .map((p) => p.id)
+  );
+
+  const todayItems = filtered.filter((p) => latestProductIds.has(p.id));
+  const thisWeekItems = filtered.filter((p) => !latestProductIds.has(p.id) && p.daysAgo >= 1 && p.daysAgo <= 7);
+  const olderItems = filtered.filter((p) => !latestProductIds.has(p.id) && p.daysAgo > 7);
 
   const renderSection = (title: string, icon: React.ReactNode, items: typeof filtered, testId: string) => {
     if (items.length === 0) return null;
