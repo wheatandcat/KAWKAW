@@ -2,6 +2,11 @@
 interface SvgElement { tag: string; props: Record<string, string>; }
 
 export const lucideIconSvgData: Record<string, SvgElement[]> = {
+  "timer": [
+    { "tag": "line", "props": { "x1": "10", "x2": "14", "y1": "2", "y2": "2" } },
+    { "tag": "line", "props": { "x1": "12", "x2": "15", "y1": "14", "y2": "11" } },
+    { "tag": "circle", "props": { "cx": "12", "cy": "14", "r": "8" } }
+  ],
   "headphones": [
     {
       "tag": "path",
