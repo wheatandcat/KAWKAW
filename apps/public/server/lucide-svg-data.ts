@@ -1,3 +1,4 @@
+// OG画像生成用のSVGデータ。新しいアイコンを追加する場合は lib/icon-registry.ts にも追加すること。
 interface SvgElement { tag: string; props: Record<string, string>; }
 
 export const lucideIconSvgData: Record<string, SvgElement[]> = {
