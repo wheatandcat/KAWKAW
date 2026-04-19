@@ -12,3 +12,5 @@ doc
 cloudflare/.wrangler
 tsconfig.tsbuildinfo
 maker_demo.mp4
+settings.local.json
+plans/*

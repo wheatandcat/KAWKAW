@@ -11,6 +11,7 @@ import {
   Keyboard, Circle, Package, Clock, User, Clapperboard, Bot, Navigation, Hand,
   Box, Ticket, Plane, Table2, PieChart, Bookmark, BookType, Languages, Tv2,
   Frame, CookingPot, Waves, DoorOpen, CloudSun, Armchair, Hammer, Luggage,
+  Timer,
   type LucideIcon,
 } from "lucide-react";
 
@@ -132,6 +133,7 @@ export const iconRegistry: IconDef[] = [
   { kebab: "armchair", pascal: "Armchair", component: Armchair },
   { kebab: "hammer", pascal: "Hammer", component: Hammer },
   { kebab: "luggage", pascal: "Luggage", component: Luggage },
+  { kebab: "timer", pascal: "Timer", component: Timer },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
