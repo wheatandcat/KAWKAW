@@ -11,6 +11,7 @@ import {
   Star,
   ShoppingCart,
   ChevronLeft,
+  ChevronRight,
   Truck,
   Shield,
   RotateCcw,
@@ -31,7 +32,38 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const reviewsRef = useRef<HTMLDivElement>(null);
+  const relatedScrollRef = useRef<HTMLDivElement>(null);
   const product = products.find((p) => p.id === id);
+
+  const relatedProducts = product
+    ? (() => {
+        const filtered = products.filter(
+          (p) =>
+            p.category === product.category &&
+            p.id !== product.id &&
+            !p.disabled,
+        );
+        // 時間帯でシャッフル (1時間ごとに順番が変わる)
+        const seed = Math.floor(Date.now() / 3_600_000);
+        const seededRand = (n: number) => {
+          const x = Math.sin(seed + n) * 10000;
+          return x - Math.floor(x);
+        };
+        return filtered
+          .map((p, i) => ({ p, r: seededRand(i) }))
+          .sort((a, b) => a.r - b.r)
+          .map(({ p }) => p)
+          .slice(0, 12);
+      })()
+    : [];
+
+  const scrollRelated = (dir: "left" | "right") => {
+    if (!relatedScrollRef.current) return;
+    relatedScrollRef.current.scrollBy({
+      left: dir === "left" ? -320 : 320,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     const scrollTo = searchParams.get("scrollTo");
@@ -239,6 +271,91 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
           </div>
         </div>
       </div>
+
+      {relatedProducts.length > 0 && (
+        <div className="max-w-5xl mx-auto px-4 py-6">
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-base font-bold">この商品に関連する商品</h2>
+          </div>
+          <div className="relative group">
+            <button
+              onClick={() => scrollRelated("left")}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              aria-label="前へ"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <div
+              ref={relatedScrollRef}
+              className="flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {relatedProducts.map((rp) => {
+                const rpDiscount = Math.round(
+                  ((rp.originalPrice - rp.price) / rp.originalPrice) * 100,
+                );
+                return (
+                  <Link
+                    key={rp.id}
+                    href={`/product/${rp.id}`}
+                    className="shrink-0"
+                  >
+                    <Card className="w-36 p-3 flex flex-col gap-2 hover:shadow-md transition-shadow cursor-pointer h-full">
+                      <div className="flex items-center justify-center bg-muted rounded-md p-3 h-24">
+                        <ProductIcon name={rp.image} className="w-14 h-14" />
+                      </div>
+                      <p className="text-xs font-medium line-clamp-3 leading-tight">
+                        {rp.name}
+                      </p>
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-2.5 h-2.5 ${
+                              i < Math.floor(rp.rating)
+                                ? "text-amber-400 fill-amber-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                        <span className="text-[10px] text-muted-foreground ml-0.5">
+                          ({rp.reviewCount.toLocaleString()})
+                        </span>
+                      </div>
+                      <div className="mt-auto">
+                        <div className="flex items-center gap-1 flex-wrap">
+                          <Badge
+                            variant="destructive"
+                            className="text-[9px] px-1 py-0 no-default-hover-elevate no-default-active-elevate"
+                          >
+                            -{rpDiscount}%
+                          </Badge>
+                          <span className="text-sm font-bold">
+                            ¥{rp.price.toLocaleString()}
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-muted-foreground">
+                          参考:{" "}
+                          <span className="line-through">
+                            ¥{rp.originalPrice.toLocaleString()}
+                          </span>
+                        </p>
+                      </div>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+            <button
+              onClick={() => scrollRelated("right")}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              aria-label="次へ"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       <div ref={reviewsRef}>
         <ReviewSection productId={product.id} />
