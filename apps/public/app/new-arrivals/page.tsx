@@ -26,7 +26,7 @@ function getNewArrivals(): (Product & {
   return [...products]
     .filter((p) => !p.disabled)
     .map((p) => {
-      const daysAgo = Math.floor(rng(parseInt(p.id) * 3) * 30);
+      const daysAgo = Math.floor(rng(parseInt(p.id) * 3) * 8);
       const isNew = daysAgo <= 7;
       const isHot = rng(parseInt(p.id) * 5 + 1) > 0.7;
       return { ...p, daysAgo, isNew, isHot };
