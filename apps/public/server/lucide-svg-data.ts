@@ -2464,5 +2464,22 @@ export const lucideIconSvgData: Record<string, SvgElement[]> = {
     { "tag": "path", "props": { "d": "M10 20h4" } },
     { "tag": "circle", "props": { "cx": "16", "cy": "20", "r": "2" } },
     { "tag": "circle", "props": { "cx": "8", "cy": "20", "r": "2" } }
+  ],
+  "circle-stop": [
+    { "tag": "circle", "props": { "cx": "12", "cy": "12", "r": "10" } },
+    { "tag": "rect", "props": { "x": "9", "y": "9", "width": "6", "height": "6", "rx": "1" } }
+  ],
+  "credit-card": [
+    { "tag": "rect", "props": { "width": "20", "height": "14", "x": "2", "y": "5", "rx": "2" } },
+    { "tag": "line", "props": { "x1": "2", "x2": "22", "y1": "10", "y2": "10" } }
+  ],
+  "book-open": [
+    { "tag": "path", "props": { "d": "M12 7v14" } },
+    { "tag": "path", "props": { "d": "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" } }
+  ],
+  "image": [
+    { "tag": "rect", "props": { "width": "18", "height": "18", "x": "3", "y": "3", "rx": "2", "ry": "2" } },
+    { "tag": "circle", "props": { "cx": "9", "cy": "9", "r": "2" } },
+    { "tag": "path", "props": { "d": "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" } }
   ]
 };

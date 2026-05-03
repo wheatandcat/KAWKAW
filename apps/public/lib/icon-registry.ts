@@ -111,6 +111,10 @@ import {
   Hammer,
   Luggage,
   Timer,
+  CircleStop,
+  CreditCard,
+  BookOpen,
+  Image,
   type LucideIcon,
 } from "lucide-react";
 
@@ -233,6 +237,10 @@ export const iconRegistry: IconDef[] = [
   { kebab: "hammer", pascal: "Hammer", component: Hammer },
   { kebab: "luggage", pascal: "Luggage", component: Luggage },
   { kebab: "timer", pascal: "Timer", component: Timer },
+  { kebab: "circle-stop", pascal: "CircleStop", component: CircleStop },
+  { kebab: "credit-card", pascal: "CreditCard", component: CreditCard },
+  { kebab: "book-open", pascal: "BookOpen", component: BookOpen },
+  { kebab: "image", pascal: "Image", component: Image },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
