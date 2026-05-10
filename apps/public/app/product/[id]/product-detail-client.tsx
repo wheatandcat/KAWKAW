@@ -53,7 +53,7 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
           .map((p, i) => ({ p, r: seededRand(i) }))
           .sort((a, b) => a.r - b.r)
           .map(({ p }) => p)
-          .slice(0, 12);
+          .slice(0, 3);
       })()
     : [];
 
