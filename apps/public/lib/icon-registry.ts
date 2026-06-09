@@ -115,6 +115,10 @@ import {
   CreditCard,
   BookOpen,
   Image,
+  Soup,
+  CloudRain,
+  Ear,
+  Archive,
   type LucideIcon,
 } from "lucide-react";
 
@@ -241,6 +245,10 @@ export const iconRegistry: IconDef[] = [
   { kebab: "credit-card", pascal: "CreditCard", component: CreditCard },
   { kebab: "book-open", pascal: "BookOpen", component: BookOpen },
   { kebab: "image", pascal: "Image", component: Image },
+  { kebab: "soup", pascal: "Soup", component: Soup },
+  { kebab: "cloud-rain", pascal: "CloudRain", component: CloudRain },
+  { kebab: "ear", pascal: "Ear", component: Ear },
+  { kebab: "archive", pascal: "Archive", component: Archive },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);

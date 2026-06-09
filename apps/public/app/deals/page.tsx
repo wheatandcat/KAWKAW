@@ -100,7 +100,6 @@ export default function DealsPage() {
 
               <div className="flex-1 text-center md:text-left">
                 <Badge variant="destructive" className="no-default-hover-elevate no-default-active-elevate gap-1 mb-2">
-                  <Percent className="w-3 h-3" />
                   本日限定 {spotlightDeal.dealDiscount}%OFF
                 </Badge>
 
