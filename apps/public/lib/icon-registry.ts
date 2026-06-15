@@ -119,6 +119,8 @@ import {
   CloudRain,
   Ear,
   Archive,
+  Puzzle,
+  AudioLines,
   type LucideIcon,
 } from "lucide-react";
 
@@ -249,6 +251,8 @@ export const iconRegistry: IconDef[] = [
   { kebab: "cloud-rain", pascal: "CloudRain", component: CloudRain },
   { kebab: "ear", pascal: "Ear", component: Ear },
   { kebab: "archive", pascal: "Archive", component: Archive },
+  { kebab: "puzzle", pascal: "Puzzle", component: Puzzle },
+  { kebab: "audio-lines", pascal: "AudioLines", component: AudioLines },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
