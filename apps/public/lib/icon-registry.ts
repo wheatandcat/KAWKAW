@@ -121,6 +121,11 @@ import {
   Archive,
   Puzzle,
   AudioLines,
+  Bandage,
+  Volume2,
+  Scale,
+  Activity,
+  Gauge,
   type LucideIcon,
 } from "lucide-react";
 
@@ -253,6 +258,11 @@ export const iconRegistry: IconDef[] = [
   { kebab: "archive", pascal: "Archive", component: Archive },
   { kebab: "puzzle", pascal: "Puzzle", component: Puzzle },
   { kebab: "audio-lines", pascal: "AudioLines", component: AudioLines },
+  { kebab: "bandage", pascal: "Bandage", component: Bandage },
+  { kebab: "volume-2", pascal: "Volume2", component: Volume2 },
+  { kebab: "scale", pascal: "Scale", component: Scale },
+  { kebab: "activity", pascal: "Activity", component: Activity },
+  { kebab: "gauge", pascal: "Gauge", component: Gauge },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);

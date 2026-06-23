@@ -2515,5 +2515,33 @@ export const lucideIconSvgData: Record<string, SvgElement[]> = {
     { "tag": "path", "props": { "d": "M14 8v7" } },
     { "tag": "path", "props": { "d": "M18 5v13" } },
     { "tag": "path", "props": { "d": "M22 10v3" } }
+  ],
+  "bandage": [
+    { "tag": "path", "props": { "d": "M10 10.01h.01" } },
+    { "tag": "path", "props": { "d": "M10 14.01h.01" } },
+    { "tag": "path", "props": { "d": "M14 10.01h.01" } },
+    { "tag": "path", "props": { "d": "M14 14.01h.01" } },
+    { "tag": "path", "props": { "d": "M18 6v11.5" } },
+    { "tag": "path", "props": { "d": "M6 6v12" } },
+    { "tag": "rect", "props": { "x": "2", "y": "6", "width": "20", "height": "12", "rx": "2" } }
+  ],
+  "volume-2": [
+    { "tag": "path", "props": { "d": "M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" } },
+    { "tag": "path", "props": { "d": "M16 9a5 5 0 0 1 0 6" } },
+    { "tag": "path", "props": { "d": "M19.364 18.364a9 9 0 0 0 0-12.728" } }
+  ],
+  "scale": [
+    { "tag": "path", "props": { "d": "m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" } },
+    { "tag": "path", "props": { "d": "m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" } },
+    { "tag": "path", "props": { "d": "M7 21h10" } },
+    { "tag": "path", "props": { "d": "M12 3v18" } },
+    { "tag": "path", "props": { "d": "M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" } }
+  ],
+  "activity": [
+    { "tag": "path", "props": { "d": "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" } }
+  ],
+  "gauge": [
+    { "tag": "path", "props": { "d": "m12 14 4-4" } },
+    { "tag": "path", "props": { "d": "M3.34 19a10 10 0 1 1 17.32 0" } }
   ]
 };
