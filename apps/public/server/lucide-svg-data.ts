@@ -2543,5 +2543,35 @@ export const lucideIconSvgData: Record<string, SvgElement[]> = {
   "gauge": [
     { "tag": "path", "props": { "d": "m12 14 4-4" } },
     { "tag": "path", "props": { "d": "M3.34 19a10 10 0 1 1 17.32 0" } }
+  ],
+  "utensils": [
+    { "tag": "path", "props": { "d": "M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" } },
+    { "tag": "path", "props": { "d": "M7 2v20" } },
+    { "tag": "path", "props": { "d": "M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" } }
+  ],
+  "battery-charging": [
+    { "tag": "path", "props": { "d": "M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" } },
+    { "tag": "path", "props": { "d": "M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h1" } },
+    { "tag": "path", "props": { "d": "m11 7-3 5h4l-3 5" } },
+    { "tag": "line", "props": { "x1": "22", "x2": "22", "y1": "11", "y2": "13" } }
+  ],
+  "library": [
+    { "tag": "path", "props": { "d": "m16 6 4 14" } },
+    { "tag": "path", "props": { "d": "M12 6v14" } },
+    { "tag": "path", "props": { "d": "M8 8v12" } },
+    { "tag": "path", "props": { "d": "M4 4v16" } }
+  ],
+  "sprout": [
+    { "tag": "path", "props": { "d": "M7 20h10" } },
+    { "tag": "path", "props": { "d": "M10 20c5.5-2.5.8-6.4 3-10" } },
+    { "tag": "path", "props": { "d": "M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" } },
+    { "tag": "path", "props": { "d": "M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" } }
+  ],
+  "grid-3x3": [
+    { "tag": "rect", "props": { "width": "18", "height": "18", "x": "3", "y": "3", "rx": "2" } },
+    { "tag": "path", "props": { "d": "M3 9h18" } },
+    { "tag": "path", "props": { "d": "M3 15h18" } },
+    { "tag": "path", "props": { "d": "M9 3v18" } },
+    { "tag": "path", "props": { "d": "M15 3v18" } }
   ]
 };
