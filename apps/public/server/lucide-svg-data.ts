@@ -2573,5 +2573,34 @@ export const lucideIconSvgData: Record<string, SvgElement[]> = {
     { "tag": "path", "props": { "d": "M3 15h18" } },
     { "tag": "path", "props": { "d": "M9 3v18" } },
     { "tag": "path", "props": { "d": "M15 3v18" } }
+  ],
+  "wallet": [
+    { "tag": "path", "props": { "d": "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" } },
+    { "tag": "path", "props": { "d": "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" } }
+  ],
+  "cable": [
+    { "tag": "path", "props": { "d": "M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1" } },
+    { "tag": "path", "props": { "d": "M19 15V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V9" } },
+    { "tag": "path", "props": { "d": "M21 21v-2h-4" } },
+    { "tag": "path", "props": { "d": "M3 5h4V3" } },
+    { "tag": "path", "props": { "d": "M7 5a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1V3" } }
+  ],
+  "washing-machine": [
+    { "tag": "path", "props": { "d": "M3 6h3" } },
+    { "tag": "path", "props": { "d": "M17 6h.01" } },
+    { "tag": "rect", "props": { "width": "18", "height": "20", "x": "3", "y": "2", "rx": "2" } },
+    { "tag": "circle", "props": { "cx": "12", "cy": "13", "r": "5" } },
+    { "tag": "path", "props": { "d": "M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5" } }
+  ],
+  "party-popper": [
+    { "tag": "path", "props": { "d": "M5.8 11.3 2 22l10.7-3.79" } },
+    { "tag": "path", "props": { "d": "M4 3h.01" } },
+    { "tag": "path", "props": { "d": "M22 8h.01" } },
+    { "tag": "path", "props": { "d": "M15 2h.01" } },
+    { "tag": "path", "props": { "d": "M22 20h.01" } },
+    { "tag": "path", "props": { "d": "m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" } },
+    { "tag": "path", "props": { "d": "m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" } },
+    { "tag": "path", "props": { "d": "m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" } },
+    { "tag": "path", "props": { "d": "M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" } }
   ]
 };

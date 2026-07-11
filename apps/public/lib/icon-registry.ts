@@ -126,6 +126,10 @@ import {
   Scale,
   Activity,
   Gauge,
+  Wallet,
+  Cable,
+  WashingMachine,
+  PartyPopper,
   type LucideIcon,
 } from "lucide-react";
 
@@ -263,6 +267,14 @@ export const iconRegistry: IconDef[] = [
   { kebab: "scale", pascal: "Scale", component: Scale },
   { kebab: "activity", pascal: "Activity", component: Activity },
   { kebab: "gauge", pascal: "Gauge", component: Gauge },
+  { kebab: "wallet", pascal: "Wallet", component: Wallet },
+  { kebab: "cable", pascal: "Cable", component: Cable },
+  {
+    kebab: "washing-machine",
+    pascal: "WashingMachine",
+    component: WashingMachine,
+  },
+  { kebab: "party-popper", pascal: "PartyPopper", component: PartyPopper },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
