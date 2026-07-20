@@ -130,6 +130,12 @@ import {
   Cable,
   WashingMachine,
   PartyPopper,
+  Utensils,
+  Milk,
+  Popcorn,
+  Map,
+  ShoppingBasket,
+  Bed,
   type LucideIcon,
 } from "lucide-react";
 
@@ -275,6 +281,12 @@ export const iconRegistry: IconDef[] = [
     component: WashingMachine,
   },
   { kebab: "party-popper", pascal: "PartyPopper", component: PartyPopper },
+  { kebab: "utensils", pascal: "Utensils", component: Utensils },
+  { kebab: "milk", pascal: "Milk", component: Milk },
+  { kebab: "popcorn", pascal: "Popcorn", component: Popcorn },
+  { kebab: "map", pascal: "Map", component: Map },
+  { kebab: "shopping-basket", pascal: "ShoppingBasket", component: ShoppingBasket },
+  { kebab: "bed", pascal: "Bed", component: Bed },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
