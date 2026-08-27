@@ -14,3 +14,4 @@ tsconfig.tsbuildinfo
 maker_demo.mp4
 settings.local.json
 plans/*
+scripts/__pycache__
