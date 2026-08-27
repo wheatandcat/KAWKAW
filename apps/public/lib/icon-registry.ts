@@ -136,6 +136,8 @@ import {
   Map,
   ShoppingBasket,
   Bed,
+  Grid3x3,
+  Droplet,
   type LucideIcon,
 } from "lucide-react";
 
@@ -287,6 +289,8 @@ export const iconRegistry: IconDef[] = [
   { kebab: "map", pascal: "Map", component: Map },
   { kebab: "shopping-basket", pascal: "ShoppingBasket", component: ShoppingBasket },
   { kebab: "bed", pascal: "Bed", component: Bed },
+  { kebab: "grid-3x3", pascal: "Grid3x3", component: Grid3x3 },
+  { kebab: "droplet", pascal: "Droplet", component: Droplet },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
