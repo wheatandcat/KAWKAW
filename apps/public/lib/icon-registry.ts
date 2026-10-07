@@ -138,6 +138,13 @@ import {
   Bed,
   Grid3x3,
   Droplet,
+  Sprout,
+  Worm,
+  Search,
+  Stethoscope,
+  Hourglass,
+  Salad,
+  Cctv,
   type LucideIcon,
 } from "lucide-react";
 
@@ -291,6 +298,13 @@ export const iconRegistry: IconDef[] = [
   { kebab: "bed", pascal: "Bed", component: Bed },
   { kebab: "grid-3x3", pascal: "Grid3x3", component: Grid3x3 },
   { kebab: "droplet", pascal: "Droplet", component: Droplet },
+  { kebab: "sprout", pascal: "Sprout", component: Sprout },
+  { kebab: "worm", pascal: "Worm", component: Worm },
+  { kebab: "search", pascal: "Search", component: Search },
+  { kebab: "stethoscope", pascal: "Stethoscope", component: Stethoscope },
+  { kebab: "hourglass", pascal: "Hourglass", component: Hourglass },
+  { kebab: "salad", pascal: "Salad", component: Salad },
+  { kebab: "cctv", pascal: "Cctv", component: Cctv },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
