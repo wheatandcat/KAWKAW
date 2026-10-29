@@ -158,6 +158,9 @@ import {
   Mail,
   RotateCcw,
   PenLine,
+  HeartHandshake,
+  Flashlight,
+  HardHat,
   type LucideIcon,
 } from "lucide-react";
 
@@ -331,6 +334,9 @@ export const iconRegistry: IconDef[] = [
   { kebab: "mail", pascal: "Mail", component: Mail },
   { kebab: "rotate-ccw", pascal: "RotateCcw", component: RotateCcw },
   { kebab: "pen-line", pascal: "PenLine", component: PenLine },
+  { kebab: "heart-handshake", pascal: "HeartHandshake", component: HeartHandshake },
+  { kebab: "flashlight", pascal: "Flashlight", component: Flashlight },
+  { kebab: "hard-hat", pascal: "HardHat", component: HardHat },
 ];
 
 export const ICON_OPTIONS: string[] = iconRegistry.map((d) => d.kebab);
